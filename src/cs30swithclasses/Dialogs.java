@@ -18,11 +18,24 @@ import javax.swing.JTextArea;
  */
 public class Dialogs 
 {
-
-    public static String title      = "Sample App";
-    public static Font   font       = new Font("Consolas",Font.PLAIN,12);
-    public static Color  background = new Color(238,238,238);
-    public static Color  foreground = new Color(0,0,0);
+    
+    private static final String DEFAULT_TITLE       = "Sample App";
+    private static final String DEFAULT_FONT_FACE   = "Consolas";
+    private static final int    DEFAULT_FONT_SIZE   = 12;
+    private static final int    DEFAULT_RED_COLOR   = 238;
+    private static final int    DEFAULT_GREEN_COLOR = 238;
+    private static final int    DEFAULT_BLUE_COLOR  = 238;
+    
+    private static final Font   DEFAULT_FONT        = new Font(
+            DEFAULT_FONT_FACE,Font.PLAIN,DEFAULT_FONT_SIZE);
+    private static final Color  DEFAULT_BACKGROUND  = new Color(
+            DEFAULT_RED_COLOR,DEFAULT_GREEN_COLOR,DEFAULT_BLUE_COLOR);
+    private static final Color  DEFAULT_FOREGROUND  = new Color(0,0,0);
+    
+    public static String title      = DEFAULT_TITLE;
+    public static Font   font       = DEFAULT_FONT;
+    public static Color  background = DEFAULT_BACKGROUND;
+    public static Color  foreground = DEFAULT_FOREGROUND;
     
     
     /**
