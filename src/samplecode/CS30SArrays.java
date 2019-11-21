@@ -268,7 +268,84 @@ public class CS30SArrays
         }
         return numbers;                     // return completed array
     }
+    
+    /**
+     * Generates an array of random doubles in the range between low and high
+     * 
+     * @param low the lowest number in the range
+     * @param high the highest number in the range
+     * @param size the size to make the array
+     * @return an array of random doubles
+     */
+    private static double[] random(double low, double high, int size) {
+        double[] numbers = new double[size]; // create empty array 
+        for (int i = 0; i < size; i++) {    // traverse array size
+            numbers[i] = random(low,high);  // assign random value to each index
+        }
+        return numbers;                     // return completed array
+    }
    
+    /**
+     * Generates an array of random characters in the range between low and high
+     * 
+     * @param low the lowest number in the range
+     * @param high the highest number in the range
+     * @param size the size to make the array
+     * @return an array of random characters
+     */
+    private static char[] random(char low, char high, int size) {
+        char[] numbers = new char[size];    // create empty array 
+        for (int i = 0; i < size; i++) {    // traverse array size
+            numbers[i] = random(low,high);  // assign random value to each index
+        }
+        return numbers;                     // return completed array
+    }
+    
+    /**
+     * Formats the array into a string that could be outputted
+     * 
+     * @param array the array to format
+     * @return a string of formatted text
+     */
+    private static String toString(int[] array) {
+        String text = "[";
+        for (int i = 0; i < array.length-1; i++) {
+            text += array[i] + ",";
+        }
+        text += array[array.length-1] + "]";
+        return text;
+    }
+    
+    /**
+     * Formats the array into a string that could be outputted
+     * 
+     * @param array the array to format
+     * @return a string of formatted text
+     */
+    private static String toString(double[] array) {
+        String text = "[";
+        for (int i = 0; i < array.length-1; i++) {
+            text += array[i] + ",";
+        }
+        text += array[array.length-1] + "]";
+        return text;
+    }
+    
+    /**
+     * Formats the array into a string that could be outputted
+     * 
+     * @param array the array to format
+     * @return a string of formatted text
+     */
+    private static String toString(char[] array) {
+        String text = "[";
+        for (int i = 0; i < array.length-1; i++) {
+            text += array[i] + ",";
+        }
+        text += array[array.length-1] + "]";
+        return text;
+    }
+    
     /**
      * Generates a random character
      * 
@@ -288,11 +365,18 @@ public class CS30SArrays
      * @return random number in the range
      */
     private static int random(int low, int high) {
-        double seed  = Math.random();
-        double L     = (double)low;
-        double H     = (double)high;
-        double value = (H - L + 1) * seed + L;
-        return (int)value;        
+        return (int)(random((double)low, (double)high));
+    }
+    
+    /**
+     * Generate a random number in a range
+     * 
+     * @param low the lowest number in the range
+     * @param high the highest number in the range
+     * @return random number in the range
+     */
+    private static double random(double low, double high) {
+        return (high - low + 1d) * Math.random() + low;
     }
 
     // METHODS and VARIABLES FOR THIS PROBLEM below.............................
@@ -301,16 +385,12 @@ public class CS30SArrays
      * The main logic for this program
      */
     private static void program() {
-        do {
-            // constant:
-            final String[] CHOICES = { "A","B","C" };
-            
+        do {                        
             // variables:
             String text = "Sample program...\n\n";
             
             // text input dialogs
-            String  s1 = input("Enter string");
-            String  s2 = choices("Pick one", CHOICES);
+            String  s1 = input("Enter string");            
             int     n1 = inputInteger("Enter integer");
             double  n2 = inputDouble("Enter double");
             int     n3 = random(1, 5);
@@ -318,24 +398,36 @@ public class CS30SArrays
             boolean b1 = inRange(5, n3, n4);
             boolean b2 = isEven(5);     
             boolean b3 = yesNo("Do you understand?");
+            double  d1 = random(1.0, 10.0);
             char    c1 = random('a', 'z');
-            int[]   a1 = random(1, 100, 10);
             
+            // constant:
+            final String[] CHOICES = { "A","B","C" };
+            
+            String   s2 = choices("Pick one", CHOICES);
+            int[]    a1 = random(1, 100, 5);
+            double[] a2 = random(1.0, 10.0, 5);
+            char[]   a3 = random('a', 'z', 5);
+            String   s3 = toString(a1);
+            String   s4 = toString(a2);
+            String   s5 = toString(a3);
+                        
             // prepare output results:
-            text += "String = \t\t" + s1 + "\n";
-            text += "String = \t\t" + s2 + "\n";
-            text += "int    = \t\t" + n1 + "\n";
-            text += "double = \t\t" + n2 + "\n";
-            text += "5 between " + n3 + " and " + n4 + " = \t" + b1 + "\n";
-            text += "5 is even = \t\t" + b2 + "\n";      
-            text += "Do you understand = \t" + b3 + "\n";    
-            text += "random char = \t\t" + c1 + "\n";
-            // now the array...
-            text += "array = \t\t";
-            for (int i = 0; i < a1.length; i++) {
-                text += a1[i] + ",";
-            }
+            text += "String"                    + "\t\t\t= " + s1 + "\n";
+            text += "int"                       + "\t\t\t= " + n1 + "\n";
+            text += "double"                    + "\t\t\t= " + n2 + "\n";
+            text += "5 {" + n3 + "-" + n4 + "}" + "\t\t\t= " + b1 + "\n";
+            text += "5 is even"                 + "\t\t= "   + b2 + "\n";      
+            text += "Do you understand"         + "\t= "     + b3 + "\n";    
+            text += "random double"             + "\t\t= "   + d1 + "\n";
+            text += "random char"               + "\t\t= "   + c1 + "\n";
             
+            // now the arrays...
+            text += "choice was"                + "\t\t= "   + s2 + "\n";            
+            text += "random int array"          + "\t= " + s3 + "\n";
+            text += "random double array"       + "\t= " + s4 + "\n";
+            text += "random char array"         + "\t= " + s5 + "\n";
+                        
             output(text);
         } while (playAgain() == true);
     }
