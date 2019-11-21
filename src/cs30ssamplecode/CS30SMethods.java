@@ -1,6 +1,6 @@
 
 /** required package class namespace */
-package samplecode;
+package cs30ssamplecode;
 
 /** required imports */
 import javax.swing.JOptionPane;

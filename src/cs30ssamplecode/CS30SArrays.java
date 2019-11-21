@@ -1,6 +1,6 @@
 
 /** required package class namespace */
-package samplecode;
+package cs30ssamplecode;
 
 /** required imports */
 import java.awt.Color;
@@ -424,9 +424,9 @@ public class CS30SArrays
             
             // now the arrays...
             text += "choice was"                + "\t\t= "   + s2 + "\n";            
-            text += "random int array"          + "\t= " + s3 + "\n";
-            text += "random double array"       + "\t= " + s4 + "\n";
-            text += "random char array"         + "\t= " + s5 + "\n";
+            text += "random int array"          + "\t= "     + s3 + "\n";
+            text += "random double array"       + "\t= "     + s4 + "\n";
+            text += "random char array"         + "\t= "     + s5 + "\n";
                         
             output(text);
         } while (playAgain() == true);
