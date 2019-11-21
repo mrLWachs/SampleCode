@@ -12,13 +12,13 @@ import javax.swing.JTextArea;
 
 
 /**
- * SampleApp.java - A sample of some code to try from up to the end of the 
+ * CS30SArrays.java - A sample of some code to try from up to the end of the 
  * arrays unit. As you solve problems, some common tasks keep coming up like:
  *    - inputting a number
  *    - giving users a choice from a list
  *    - making randoms
  * Etc. and you find you are writing simple dialog boxes or trying something 
- * a little fancier with graphical type things. These methods is just an 
+ * a little fancier with graphical type things. These methods are just an 
  * example of some of the code tried in class or when helping students. It is
  * not a definitive code, may have bugs and has room for improvement as well
  * as your own personal touches. But it does give you something to try to help
