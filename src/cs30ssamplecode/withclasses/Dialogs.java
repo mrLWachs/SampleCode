@@ -11,7 +11,7 @@ import javax.swing.JTextArea;
 
  
 /**
- * Dialogs.java - description
+ * Dialogs.java - a collection of useful methods for working with dialogs
  *
  * @author Mr. Wachs
  * @since Nov. 21, 2019, 3:49:53 p.m.

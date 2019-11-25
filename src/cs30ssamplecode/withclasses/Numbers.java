@@ -4,7 +4,7 @@ package cs30ssamplecode.withclasses;
 
  
 /**
- * Numbers.java - description
+ * Numbers.java - a collection of useful methods for working with numbers
  *
  * @author Mr. Wachs
  * @since Nov. 21, 2019, 3:49:35 p.m.
@@ -12,12 +12,15 @@ package cs30ssamplecode.withclasses;
 public class Numbers 
 {
 
-    /**
-     * Default constructor, set class properties
-     */
-    public Numbers() {
-        
-    }
+    // Encapsulated global class properties below..............................
+    private static final char   NEGATIVE     = '-';
+    private static final char   DECIMAL      = '.';
+    private static final char   ALPHA_LOW    = 'a';
+    private static final char   ALPHA_HIGH  = 'z';
+    private static final String ARRAY_START  = "[";
+    private static final String ARRAY_DIVIDE = ",";
+    private static final String ARRAY_END    = "]";
+    
     
     /**
      * Checks the value to see if it contains numerical characters or a "-" 
@@ -30,8 +33,8 @@ public class Numbers
         char[] characters = value.toCharArray();
         for (int i = 0; i < characters.length; i++) {            
             if (Character.isDigit(characters[i]) == false) {
-                if (characters[i] != '.' && 
-                    characters[i] != '-') {
+                if (characters[i] != DECIMAL && 
+                    characters[i] != NEGATIVE) {
                     return false;
                 }
             }
@@ -49,7 +52,7 @@ public class Numbers
         char[] characters = value.toCharArray();
         for (int i = 0; i < characters.length; i++) {            
             if (Character.isDigit(characters[i]) == false) {
-                if (characters[i] != '-') {
+                if (characters[i] != NEGATIVE) {
                     return false;
                 }
             }
@@ -116,8 +119,8 @@ public class Numbers
     /**
      * Generates an array of random characters in the range between low and high
      * 
-     * @param low the lowest number in the range
-     * @param high the highest number in the range
+     * @param low the lowest character in the range
+     * @param high the highest character in the range
      * @param size the size to make the array
      * @return an array of random characters
      */
@@ -130,18 +133,34 @@ public class Numbers
     }
     
     /**
+     * Generates an array of random strings  of alphabetical characters
+     * 
+     * @param low the lowest character in the range
+     * @param high the highest character in the range
+     * @param length the length of the string to generate
+     * @param size the size to make the array
+     * @return an array of random strings
+     */
+    public static String[] random(char low, char high, int length, int size) {
+        String[] strings = new String[size]; // create empty array 
+        for (int i = 0; i < size; i++) {     // traverse array size
+            strings[i] = random(length);     // assign random value to index
+        }
+        return strings;                      // return completed array
+    }
+        
+    /**
      * Formats the array into a string that could be outputted
      * 
      * @param array the array to format
      * @return a string of formatted text
      */
     public static String toString(int[] array) {
-        String text = "[";
+        String text = ARRAY_START;
         for (int i = 0; i < array.length-1; i++) {
-            text += array[i] + ",";
+            text += array[i] + ARRAY_DIVIDE;
         }
-        text += array[array.length-1] + "]";
-        return text;
+        return text + array[array.length-1] + ARRAY_END;
     }
     
     /**
@@ -151,12 +170,11 @@ public class Numbers
      * @return a string of formatted text
      */
     public static String toString(double[] array) {
-        String text = "[";
+        String text = ARRAY_START;
         for (int i = 0; i < array.length-1; i++) {
-            text += array[i] + ",";
+            text += array[i] + ARRAY_DIVIDE;
         }
-        text += array[array.length-1] + "]";
-        return text;
+        return text + array[array.length-1] + ARRAY_END;
     }
     
     /**
@@ -166,12 +184,11 @@ public class Numbers
      * @return a string of formatted text
      */
     public static String toString(char[] array) {
-        String text = "[";
+        String text = ARRAY_START;
         for (int i = 0; i < array.length-1; i++) {
-            text += array[i] + ",";
+            text += array[i] + ARRAY_DIVIDE;
         }
-        text += array[array.length-1] + "]";
-        return text;
+        return text + array[array.length-1] + ARRAY_END;
     }
     
     /**
@@ -182,7 +199,7 @@ public class Numbers
      * @return random character in range
      */
     public static char random(char low, char high) {
-        return (char)random((int)low,(int)high);     // cast to int and back  
+        return (char)(random((int)low,(int)high));     
     }
     
     /**
@@ -204,7 +221,33 @@ public class Numbers
      * @return random number in the range
      */
     public static double random(double low, double high) {
-        return (high - low + 1d) * Math.random() + low;
+        return ((high - low + 1d) * Math.random() + low);
     }
 
+    /**
+     * Generate a random string of alphabetical characters
+     * 
+     * @param length the length of the string to generate
+     * @param low lowest character in the range
+     * @param high highest character in the range
+     * @return a random string of characters
+     */
+    public static String random(int length, char low, char high) {
+        String text = "";
+        for (int i = 0; i < length; i++) {
+            text += random(low, high);
+        }
+        return text;
+    }
+    
+    /**
+     * Generate a random string of alphabetical characters
+     * 
+     * @param length the length of the string to generate
+     * @return a random string of characters
+     */
+    public static String random(int length) {
+        return random(length, ALPHA_LOW, ALPHA_HIGH);
+    }
+    
 }

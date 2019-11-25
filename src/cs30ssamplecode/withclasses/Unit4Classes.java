@@ -4,7 +4,14 @@ package cs30ssamplecode.withclasses;
 
 
 /**
- * CS30SClasses.java - description
+ * CS30SClasses.java - A sample of some code to try from up to the end of the 
+ * classes unit. This code uses the same methods as the arrays unit, but it is 
+ * now divided into more usable classes that target the specifics of what the
+ * methods were trying to do and has categorized it into a class. this code is
+ * just an example of some of the code tried in class or when helping 
+ * students. It is not definitive code, may have bugs and has room for 
+ * improvement as well as your own personal touches. But it does give you 
+ * something to use to try to help with your problem solving.
  *
  * @author Mr. Wachs
  * @since Nov. 21, 2019, 3:49:01 p.m.
@@ -13,7 +20,8 @@ public class Unit4Classes
 {
 
     // REUSABLE VARIABLES and METHODS below.....................................
-    static final String TITLE      = "Sample App";
+    
+    static final String TITLE = "Sample App";
     
     /**
      * Main method for the project
