@@ -69,8 +69,8 @@ public class Unit4Classes
             boolean b2 = Numbers.isEven(5);     
             boolean b3 = Dialogs.yesNo("Do you understand?");
             double  d1 = Numbers.random(1.0, 10.0);
-            char    c1 = Numbers.random('a', 'z');
-            String  s2 = Numbers.random(5);
+            char    c1 = Text.random('a', 'z');
+            String  s2 = Text.random(5);
             
             // constant:
             final String[] CHOICES = { "A","B","C" };
@@ -78,21 +78,21 @@ public class Unit4Classes
             String     s3 = Dialogs.choices("Pick one", CHOICES);
             int[]      a1 = Numbers.random(1, 100, 5);
             double[]   a2 = Numbers.random(1.0, 10.0, 5);
-            char[]     a3 = Numbers.random('a', 'z', 5);
-            String[]   a4 = Numbers.random('a', 'z', 5, 5);
+            char[]     a3 = Text.random('a', 'z', 5);
+            String[]   a4 = Text.random('a', 'z', 5, 5);
             int[][]    m1 = Numbers.random(3,5,1,5);
             double[][] m2 = Numbers.random(3,5,1.0,5.0);
-            char[][]   m3 = Numbers.random(3,5,'a','z');
-            String[][] m4 = Numbers.random(3,5,5,'a','z');
+            char[][]   m3 = Text.random(3,5,'a','z');
+            String[][] m4 = Text.random(3,5,5,'a','z');
                         
-            String   s4  = Numbers.toString(a1);
-            String   s5  = Numbers.toString(a2);
-            String   s6  = Numbers.toString(a3);
-            String   s7  = Numbers.toString(a4);
-            String   s8  = Numbers.toString(m1);
-            String   s9  = Numbers.toString(m2);
-            String   s10 = Numbers.toString(m3);
-            String   s11 = Numbers.toString(m4);            
+            String   s4  = Text.toString(a1);
+            String   s5  = Text.toString(a2);
+            String   s6  = Text.toString(a3);
+            String   s7  = Text.toString(a4);
+            String   s8  = Text.toString(m1);
+            String   s9  = Text.toString(m2);
+            String   s10 = Text.toString(m3);
+            String   s11 = Text.toString(m4);            
                                                 
             // prepare output results:
             text += "String"                    + "\t\t\t= " + s1 + "\n";
