@@ -70,18 +70,30 @@ public class Unit4Classes
             boolean b3 = Dialogs.yesNo("Do you understand?");
             double  d1 = Numbers.random(1.0, 10.0);
             char    c1 = Numbers.random('a', 'z');
+            String  s2 = Numbers.random(5);
             
             // constant:
             final String[] CHOICES = { "A","B","C" };
             
-            String   s2 = Dialogs.choices("Pick one", CHOICES);
-            int[]    a1 = Numbers.random(1, 100, 5);
-            double[] a2 = Numbers.random(1.0, 10.0, 5);
-            char[]   a3 = Numbers.random('a', 'z', 5);
-            String   s3 = Numbers.toString(a1);
-            String   s4 = Numbers.toString(a2);
-            String   s5 = Numbers.toString(a3);
+            String     s3 = Dialogs.choices("Pick one", CHOICES);
+            int[]      a1 = Numbers.random(1, 100, 5);
+            double[]   a2 = Numbers.random(1.0, 10.0, 5);
+            char[]     a3 = Numbers.random('a', 'z', 5);
+            String[]   a4 = Numbers.random('a', 'z', 5, 5);
+            int[][]    m1 = Numbers.random(3,5,1,5);
+            double[][] m2 = Numbers.random(3,5,1.0,5.0);
+            char[][]   m3 = Numbers.random(3,5,'a','z');
+            String[][] m4 = Numbers.random(3,5,5,'a','z');
                         
+            String   s4  = Numbers.toString(a1);
+            String   s5  = Numbers.toString(a2);
+            String   s6  = Numbers.toString(a3);
+            String   s7  = Numbers.toString(a4);
+            String   s8  = Numbers.toString(m1);
+            String   s9  = Numbers.toString(m2);
+            String   s10 = Numbers.toString(m3);
+            String   s11 = Numbers.toString(m4);            
+                                                
             // prepare output results:
             text += "String"                    + "\t\t\t= " + s1 + "\n";
             text += "int"                       + "\t\t\t= " + n1 + "\n";
@@ -91,13 +103,19 @@ public class Unit4Classes
             text += "Do you understand"         + "\t= "     + b3 + "\n";    
             text += "random double"             + "\t\t= "   + d1 + "\n";
             text += "random char"               + "\t\t= "   + c1 + "\n";
-            
-            // now the arrays...
-            text += "choice was"                + "\t\t= "   + s2 + "\n";            
-            text += "random int array"          + "\t= "     + s3 + "\n";
-            text += "random double array"       + "\t= "     + s4 + "\n";
-            text += "random char array"         + "\t= "     + s5 + "\n";
+            text += "random String"             + "\t\t= "   + s2 + "\n";
                         
+            // now the arrays...
+            text += "choice was"                + "\t\t= "   + s3 + "\n";            
+            text += "random int array"          + "\t= "     + s4 + "\n";
+            text += "random double array"       + "\t= "     + s5 + "\n";
+            text += "random char array"         + "\t= "     + s6 + "\n";
+            text += "random string array"       + "\t= "     + s7 + "\n";
+            text += "random int matrix:"        + "\n"       + s8;
+            text += "random double matrix:"     + "\n"       + s9;
+            text += "random char matrix:"       + "\n"       + s10;
+            text += "random string matrix:"     + "\n"       + s11;
+                                                            
             Dialogs.output(text);
         } while (Dialogs.playAgain());
     }

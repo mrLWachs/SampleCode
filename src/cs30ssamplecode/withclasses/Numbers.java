@@ -13,13 +13,14 @@ public class Numbers
 {
 
     // Encapsulated global class properties below..............................
-    private static final char   NEGATIVE     = '-';
-    private static final char   DECIMAL      = '.';
-    private static final char   ALPHA_LOW    = 'a';
-    private static final char   ALPHA_HIGH  = 'z';
-    private static final String ARRAY_START  = "[";
-    private static final String ARRAY_DIVIDE = ",";
-    private static final String ARRAY_END    = "]";
+    private static final char   NEGATIVE      = '-';
+    private static final char   DECIMAL       = '.';
+    private static final char   ALPHA_LOW     = 'a';
+    private static final char   ALPHA_HIGH    = 'z';
+    private static final String ARRAY_START   = "[";
+    private static final String ARRAY_DIVIDE  = ",";
+    private static final String ARRAY_END     = "]";
+    private static final String MATRIX_DIVIDE = "\t";
     
     
     /**
@@ -83,7 +84,66 @@ public class Numbers
         if (number >= low && number <= high) return true;
         return false;
     }
- 
+     
+    /**
+     * Generates a random character
+     * 
+     * @param low lowest character in the range
+     * @param high highest character in the range
+     * @return random character in range
+     */
+    public static char random(char low, char high) {
+        return (char)(random((int)low,(int)high));     
+    }
+    
+    /**
+     * Generate a random number in a range
+     * 
+     * @param low the lowest number in the range
+     * @param high the highest number in the range
+     * @return random number in the range
+     */
+    public static int random(int low, int high) {
+        return (int)(random((double)low, (double)high));
+    }
+    
+    /**
+     * Generate a random number in a range
+     * 
+     * @param low the lowest number in the range
+     * @param high the highest number in the range
+     * @return random number in the range
+     */
+    public static double random(double low, double high) {
+        return ((high - low + 1d) * Math.random() + low);
+    }
+
+    /**
+     * Generate a random string of alphabetical characters
+     * 
+     * @param length the length of the string to generate
+     * @param low lowest character in the range
+     * @param high highest character in the range
+     * @return a random string of characters
+     */
+    public static String random(int length, char low, char high) {
+        String text = "";
+        for (int i = 0; i < length; i++) {
+            text += random(low, high);
+        }
+        return text;
+    }
+    
+    /**
+     * Generate a random string of alphabetical characters
+     * 
+     * @param length the length of the string to generate
+     * @return a random string of characters
+     */
+    public static String random(int length) {
+        return random(length, ALPHA_LOW, ALPHA_HIGH);
+    }
+    
     /**
      * Generates an array of random integers in the range between low and high
      * 
@@ -192,62 +252,156 @@ public class Numbers
     }
     
     /**
-     * Generates a random character
+     * Formats the array into a string that could be outputted
      * 
-     * @param low lowest character in the range
-     * @param high highest character in the range
-     * @return random character in range
+     * @param array the array to format
+     * @return a string of formatted text
      */
-    public static char random(char low, char high) {
-        return (char)(random((int)low,(int)high));     
+    public static String toString(String[] array) {
+        String text = ARRAY_START;
+        for (int i = 0; i < array.length-1; i++) {
+            text += array[i] + ARRAY_DIVIDE;
+        }
+        return text + array[array.length-1] + ARRAY_END;
     }
     
     /**
-     * Generate a random number in a range
+     * Formats the matrix into a string that could be outputted
      * 
-     * @param low the lowest number in the range
-     * @param high the highest number in the range
-     * @return random number in the range
+     * @param matrix the matrix to format
+     * @return a string of formatted text
      */
-    public static int random(int low, int high) {
-        return (int)(random((double)low, (double)high));
-    }
-    
-    /**
-     * Generate a random number in a range
-     * 
-     * @param low the lowest number in the range
-     * @param high the highest number in the range
-     * @return random number in the range
-     */
-    public static double random(double low, double high) {
-        return ((high - low + 1d) * Math.random() + low);
-    }
-
-    /**
-     * Generate a random string of alphabetical characters
-     * 
-     * @param length the length of the string to generate
-     * @param low lowest character in the range
-     * @param high highest character in the range
-     * @return a random string of characters
-     */
-    public static String random(int length, char low, char high) {
+    public static String toString(int[][] matrix) {
         String text = "";
-        for (int i = 0; i < length; i++) {
-            text += random(low, high);
+        for (int row = 0; row < matrix.length; row++) {
+            for (int column = 0; column < matrix[row].length; column++) {
+                text += matrix[row][column] + MATRIX_DIVIDE;
+            }
+            text += "\n";
         }
         return text;
     }
     
     /**
-     * Generate a random string of alphabetical characters
+     * Formats the matrix into a string that could be outputted
      * 
-     * @param length the length of the string to generate
-     * @return a random string of characters
+     * @param matrix the matrix to format
+     * @return a string of formatted text
      */
-    public static String random(int length) {
-        return random(length, ALPHA_LOW, ALPHA_HIGH);
+    public static String toString(double[][] matrix) {
+        String text = "";
+        for (int row = 0; row < matrix.length; row++) {
+            for (int column = 0; column < matrix[row].length; column++) {
+                text += matrix[row][column] + MATRIX_DIVIDE;
+            }
+            text += "\n";
+        }
+        return text;
+    }
+    
+    /**
+     * Formats the matrix into a string that could be outputted
+     * 
+     * @param matrix the matrix to format
+     * @return a string of formatted text
+     */
+    public static String toString(char[][] matrix) {
+        String text = "";
+        for (int row = 0; row < matrix.length; row++) {
+            for (int column = 0; column < matrix[row].length; column++) {
+                text += matrix[row][column] + MATRIX_DIVIDE;
+            }
+            text += "\n";
+        }
+        return text;
+    }
+    
+    /**
+     * Formats the matrix into a string that could be outputted
+     * 
+     * @param matrix the matrix to format
+     * @return a string of formatted text
+     */
+    public static String toString(String[][] matrix) {
+        String text = "";
+        for (int row = 0; row < matrix.length; row++) {
+            for (int column = 0; column < matrix[row].length; column++) {
+                text += matrix[row][column] + MATRIX_DIVIDE;
+            }
+            text += "\n";
+        }
+        return text;
+    }
+    
+    /**
+     * Generates a matrix of random integers in the range between low and high
+     * 
+     * @param rows the number of rows for the matrix
+     * @param columns the number of columns for the matrix 
+     * @param low the lowest number in the range
+     * @param high the highest number in the range
+     * @return a matrix of random integers
+     */
+    public static int[][] random(int rows, int columns, int low, int high) {
+        int[][] matrix = new int[rows][columns];    // create empty matrix
+        for (int row = 0; row < rows; row++) {      // traverse rows
+            matrix[row] = random(low, high, columns);   // create random row
+        }
+        return matrix;                              // return completed matrix
+    }
+    
+    /**
+     * Generates a matrix of random doubles in the range between low and high
+     * 
+     * @param rows the number of rows for the matrix
+     * @param columns the number of columns for the matrix 
+     * @param low the lowest number in the range
+     * @param high the highest number in the range
+     * @return a matrix of random doubles
+     */
+    public static double[][] random(int rows, int columns, double low, 
+            double high) {
+        double[][] matrix = new double[rows][columns];    // create empty matrix
+        for (int row = 0; row < rows; row++) {      // traverse rows
+            matrix[row] = random(low, high, columns);   // create random row
+        }
+        return matrix;                              // return completed matrix
+    }
+    
+    /**
+     * Generates a matrix of random characters in the range between low and high
+     * 
+     * @param rows the number of rows for the matrix
+     * @param columns the number of columns for the matrix 
+     * @param low the lowest number in the range
+     * @param high the highest number in the range
+     * @return a matrix of random characters
+     */
+    public static char[][] random(int rows, int columns, char low, char high) {
+        char[][] matrix = new char[rows][columns];      // create empty matrix
+        for (int row = 0; row < rows; row++) {          // traverse rows
+            matrix[row] = random(low, high, columns);   // create random row
+        }
+        return matrix;                              // return completed matrix
+    }
+    
+    /**
+     * Generates a matrix of random characters in the range between low and high
+     * 
+     * @param rows the number of rows for the matrix
+     * @param columns the number of columns for the matrix 
+     * @param length the size to make the random string
+     * @param low the lowest number in the range
+     * @param high the highest number in the range
+     * @return a matrix of random characters
+     */
+    public static String[][] random(int rows, int columns, int length, char low, 
+            char high) {
+        String[][] matrix = new String[rows][columns];  // create empty matrix
+        for (int row = 0; row < rows; row++) {          // traverse rows
+            matrix[row] = random(low, high, length, columns);   // create row
+        }
+        return matrix;                              // return completed matrix
     }
     
 }
