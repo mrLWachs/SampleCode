@@ -1,6 +1,6 @@
 
 /** required package class namespace */
-package cs30swithclasses;
+package cs30ssamplecode.withclasses;
 
 import java.awt.Color;
 import java.awt.Font;

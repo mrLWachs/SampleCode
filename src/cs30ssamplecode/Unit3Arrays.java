@@ -16,7 +16,7 @@ import javax.swing.JTextArea;
  * arrays unit. As you solve problems, some common tasks keep coming up like:
  *    - inputting a number
  *    - giving users a choice from a list
- *    - making randoms
+ *    - making randoms (including entire arrays of randoms)
  * Etc. and you find you are writing simple dialog boxes or trying something 
  * a little fancier with graphical type things. These methods are just an 
  * example of some of the code tried in class or when helping students. It is
@@ -27,7 +27,7 @@ import javax.swing.JTextArea;
  * @author Mr. Wachs
  * @since Nov. 14, 2019, 10:29:49 a.m.
  */
-public class CS30SArrays 
+public class Unit3Arrays 
 {
 
     // REUSABLE VARIABLES and METHODS below.....................................

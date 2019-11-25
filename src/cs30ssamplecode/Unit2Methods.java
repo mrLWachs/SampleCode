@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  * @author Mr. Wachs
  * @since Nov. 14, 2019, 10:29:49 a.m.
  */
-public class CS30SMethods
+public class Unit2Methods
 {
 
     // REUSABLE VARIABLES and METHODS below.....................................

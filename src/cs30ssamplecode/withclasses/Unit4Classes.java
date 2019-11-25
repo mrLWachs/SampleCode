@@ -1,42 +1,42 @@
 
 /** required package class namespace */
-package cs30swithclasses;
- 
+package cs30ssamplecode.withclasses;
+
+
 /**
- * Test.java - description
+ * CS30SClasses.java - description
  *
  * @author Mr. Wachs
- * @since Nov. 21, 2019, 4:06:27 p.m.
+ * @since Nov. 21, 2019, 3:49:01 p.m.
  */
-public class Test 
+public class Unit4Classes 
 {
 
-    
     // REUSABLE VARIABLES and METHODS below.....................................
-    
-    static final String TITLE = "Sample App";
-    
+    static final String TITLE      = "Sample App";
     
     /**
-     * Default constructor, set class properties
+     * Main method for the project
+     * 
+     * @param args the command line arguments
      */
-    public Test() {
+    public static void main(String[] args) {
         start();
         program();
         end();
     }
-
+    
     /**
      * starts the application
      */
-    private void start() {
+    private static void start() {
         Dialogs.output("Welcome to " + TITLE);
     }
 
     /**
      * ends the application
      */
-    private void end() {
+    private static void end() {
         Dialogs.output("Thanks for using " + TITLE);
         System.exit(0);                                 // terminates the app
     }
@@ -46,7 +46,7 @@ public class Test
     /**
      * The main logic for this program
      */
-    private void program() {
+    private static void program() {
         do {                        
             // variables:
             String text = "Sample program...\n\n";
