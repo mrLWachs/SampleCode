@@ -1,20 +1,18 @@
 
 /** required package class namespace */
-package cs40samplecode;
+package cs42samplecode;
 
 /** required imports */
-import cs40samplecode.io.Dialogs;
-import cs40samplecode.tools.Numbers;
-import cs40samplecode.tools.Text;
+import cs42samplecode.io.Dialogs;
+import cs42samplecode.tools.Numbers;
+import cs42samplecode.tools.Text;
 import java.awt.Font;
 
 
 /**
- * Unit1Recursion.java - A sample of some code to try from up to the end of the 
- * classes unit. This code uses the same methods as the arrays unit, but it is 
- * now divided into more usable classes that target the specifics of what the
- * methods were trying to do and has categorized it into a class. this code is
- * just an example of some of the code tried in class or when helping 
+ * CS42SIBSampleCode.java - A sample of some code to try from the CS42SIB
+ * course. This code is divided into more usable classes and packages. This 
+ * code is just an example of some of the code tried in class or when helping 
  * students. It is not definitive code, may have bugs and has room for 
  * improvement as well as your own personal touches. But it does give you 
  * something to use to try to help with your problem solving.
@@ -22,7 +20,7 @@ import java.awt.Font;
  * @author Mr. Wachs
  * @since Nov. 21, 2019, 3:49:01 p.m.
  */
-public class Unit1Recursion 
+public class CS42SIBSampleCode 
 {
     
     // REUSABLE VARIABLES and METHODS below.....................................
@@ -81,11 +79,6 @@ public class Unit1Recursion
             char    c1 = Text.random('a', 'z');
             String  s2 = Text.random(5);
             
-            
-            
-            
-            
-            
             // constant:
             final String[] CHOICES = { "A","B","C" };
                         
@@ -135,4 +128,5 @@ public class Unit1Recursion
             dialog.output(text);
         } while (dialog.playAgain());
     }
+    
 }

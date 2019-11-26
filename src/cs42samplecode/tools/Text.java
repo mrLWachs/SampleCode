@@ -1,6 +1,6 @@
 
 /** required package class namespace */
-package cs40samplecode.tools;
+package cs42samplecode.tools;
 
 
 /**
