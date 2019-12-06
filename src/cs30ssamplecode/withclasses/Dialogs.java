@@ -101,6 +101,31 @@ public class Dialogs
     }
     
     /**
+     * Asks the user for a number (integer) in a input dialog box
+     * 
+     * @param text the text for the dialog box
+     * @param minimum the lowest value in the input range
+     * @param maximum the highest value in the input range
+     * @return a valid integer
+     */
+    public static int inputInteger(String text, int minimum, int maximum) {
+        final String ERROR_1 = "Error, invalid number\n\n" + text;
+        final String ERROR_2 = "Error, number not inside range\n\n" + text;
+        String value = input(text);
+        int number = 0;
+        boolean done = false;
+        while (!done) {
+            if (Numbers.isInteger(value) == false) value = input(ERROR_1);
+            else {
+                number = Integer.parseInt(value);
+                if (Numbers.inRange(number, minimum, maximum)) done = true;
+                else value = input(ERROR_2);
+            }            
+        }
+        return number;        
+    }
+    
+    /**
      * Asks the user for a number (double) in a input
      * dialog box
      * 
@@ -113,6 +138,31 @@ public class Dialogs
             value = input("Error, please enter again\n\n" + text);
         }
         double number = Double.parseDouble(value);
+        return number;        
+    }
+    
+    /**
+     * Asks the user for a number (integer) in a input dialog box
+     * 
+     * @param text the text for the dialog box
+     * @param minimum the lowest value in the input range
+     * @param maximum the highest value in the input range
+     * @return a valid double
+     */
+    public static double inputDouble(String text, int minimum, int maximum) {
+        final String ERROR_1 = "Error, invalid number\n\n" + text;
+        final String ERROR_2 = "Error, number not inside range\n\n" + text;
+        String value = input(text);
+        double number = 0d;
+        boolean done = false;
+        while (!done) {
+            if (Numbers.isDouble(value) == false) value = input(ERROR_1);
+            else {
+                number = Double.parseDouble(value);
+                if (Numbers.inRange(number, minimum, maximum)) done = true;
+                else value = input(ERROR_2);
+            }            
+        }
         return number;        
     }
         

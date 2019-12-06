@@ -80,6 +80,19 @@ public class Numbers
     }
     
     /**
+     * Checks to make sure the number is in the range
+     * 
+     * @param number the number to check
+     * @param low lowest in the range
+     * @param high highest in the range
+     * @return in range (true) or not (false)
+     */
+    public static boolean inRange(double number, double low, double high) {
+        if (number >= low && number <= high) return true;
+        return false;
+    }
+    
+    /**
      * Generate a random number in a range
      * 
      * @param low the lowest number in the range
