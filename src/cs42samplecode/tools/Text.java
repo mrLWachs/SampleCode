@@ -2,6 +2,14 @@
 /** required package class namespace */
 package cs42samplecode.tools;
 
+/** required imports */
+import cs42samplecode.collections.LinkedList;
+import cs42samplecode.io.FileHandler;
+import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 
 /**
  * Text.java - a collection of useful methods for working with text
@@ -14,13 +22,34 @@ public class Text
     
     // Encapsulated global class properties below..............................
     
-    private static final char   ALPHA_LOW     = 'a';
-    private static final char   ALPHA_HIGH    = 'z';
-    private static final String ARRAY_START   = "[";
-    private static final String ARRAY_DIVIDE  = ",";
-    private static final String ARRAY_END     = "]";
-    private static final String MATRIX_DIVIDE = "\t";
+    private final char   ALPHA_LOW       = 'a';
+    private final char   ALPHA_HIGH      = 'z';
+    private final String ARRAY_START     = "[";
+    private final String ARRAY_DIVIDE    = ",";
+    private final String ARRAY_END       = "]";
+    private final String MATRIX_DIVIDE   = "\t";    
+    private final String DICTIONARY_FILE = "/cs42samplecode/tools/dictionary.txt";
      
+    private LinkedList<String>  words;
+    private FileHandler<String> fileHandler;
+    private Numbers             numbers;
+    
+    /**
+     * Default class constructor sets class properties
+     */
+    public Text() {
+        numbers = new Numbers();
+        try {
+            URL  url    = getClass().getResource(DICTIONARY_FILE);
+            URI  uri    = url.toURI();
+            File file   = new File(uri);        
+            fileHandler = new FileHandler<>();
+            words       = fileHandler.openList(file);
+        }
+        catch (URISyntaxException error) {
+            System.out.println("URI Syntax Error: " + error.getMessage());
+        }
+    }
      
     /**
      * Generates a random character
@@ -29,8 +58,8 @@ public class Text
      * @param high highest character in the range
      * @return random character in range
      */
-    public static char random(char low, char high) {
-        return (char)(Numbers.random((int)low,(int)high));     
+    public char random(char low, char high) {
+        return (char)(numbers.random((int)low,(int)high));     
     }
         
     /**
@@ -41,7 +70,7 @@ public class Text
      * @param high highest character in the range
      * @return a random string of characters
      */
-    public static String random(int length, char low, char high) {
+    public String random(int length, char low, char high) {
         String text = "";
         for (int i = 0; i < length; i++) {
             text += random(low, high);
@@ -55,9 +84,21 @@ public class Text
      * @param length the length of the string to generate
      * @return a random string of characters
      */
-    public static String random(int length) {
+    public String random(int length) {
         return random(length, ALPHA_LOW, ALPHA_HIGH);
     }    
+    
+    /**
+     * Retrieves a random word from a dictionary file
+     * 
+     * @return a random word from a dictionary file
+     */
+    public String randomWord() {
+        int low   = 0;
+        int high  = words.size()-1;
+        int index = numbers.random(low, high);
+        return words.get(index);
+    }
     
     /**
      * Generates an array of random characters in the range between low and high
@@ -67,16 +108,16 @@ public class Text
      * @param size the size to make the array
      * @return an array of random characters
      */
-    public static char[] random(char low, char high, int size) {
-        char[] numbers = new char[size];    // create empty array 
-        for (int i = 0; i < size; i++) {    // traverse array size
-            numbers[i] = random(low,high);  // assign random value to each index
+    public char[] random(char low, char high, int size) {
+        char[] characters = new char[size];     // create empty array 
+        for (int i = 0; i < size; i++) {        // traverse array size
+            characters[i] = random(low,high);   // assign random value to each index
         }
-        return numbers;                     // return completed array
+        return characters;                      // return completed array
     }
     
     /**
-     * Generates an array of random strings  of alphabetical characters
+     * Generates an array of random strings of alphabetical characters
      * 
      * @param low the lowest character in the range
      * @param high the highest character in the range
@@ -84,13 +125,27 @@ public class Text
      * @param size the size to make the array
      * @return an array of random strings
      */
-    public static String[] random(char low, char high, int length, int size) {
+    public String[] random(char low, char high, int length, int size) {
         String[] strings = new String[size]; // create empty array 
         for (int i = 0; i < size; i++) {     // traverse array size
             strings[i] = random(length);     // assign random value to index
         }
         return strings;                      // return completed array
     }       
+    
+    /**
+     * Generates an array of random words from a dictionary file
+     * 
+     * @param size the size to make the array
+     * @return an array of random words
+     */
+    public String[] randomWords(int size) {
+        String[] strings = new String[size];    // create empty array 
+        for (int i = 0; i < size; i++) {        // traverse array size
+            strings[i] = randomWord();          // assign random value to index
+        }
+        return strings;                         // return completed array
+    }
     
     /**
      * Generates a matrix of random characters in the range between low and high
@@ -101,7 +156,7 @@ public class Text
      * @param high the highest number in the range
      * @return a matrix of random characters
      */
-    public static char[][] random(int rows, int columns, char low, char high) {
+    public char[][] random(int rows, int columns, char low, char high) {
         char[][] matrix = new char[rows][columns];      // create empty matrix
         for (int row = 0; row < rows; row++) {          // traverse rows
             matrix[row] = random(low, high, columns);   // create random row
@@ -119,11 +174,26 @@ public class Text
      * @param high the highest number in the range
      * @return a matrix of random characters
      */
-    public static String[][] random(int rows, int columns, int length, char low, 
+    public String[][] random(int rows, int columns, int length, char low, 
             char high) {
         String[][] matrix = new String[rows][columns];  // create empty matrix
         for (int row = 0; row < rows; row++) {          // traverse rows
             matrix[row] = random(low, high, length, columns);   // create row
+        }
+        return matrix;                              // return completed matrix
+    }
+    
+    /**
+     * Generates a matrix of random words from a dictionary file
+     * 
+     * @param rows the number of rows for the matrix
+     * @param columns the number of columns for the matrix 
+     * @return a matrix of random words
+     */
+    public String[][] randomWords(int rows, int columns) {
+        String[][] matrix = new String[rows][columns];  // create empty matrix
+        for (int row = 0; row < rows; row++) {          // traverse rows
+            matrix[row] = randomWords(columns);         // create row
         }
         return matrix;                              // return completed matrix
     }
@@ -134,7 +204,7 @@ public class Text
      * @param array the array to format
      * @return a string of formatted text
      */
-    public static <T> String toString(T[] array) {
+    public <T> String toString(T[] array) {
         String text = ARRAY_START;
         for (int i = 0; i < array.length-1; i++) {
             text += array[i].toString() + ARRAY_DIVIDE;
@@ -148,7 +218,7 @@ public class Text
      * @param array the array to format
      * @return a string of formatted text
      */
-    public static String toString(int[] array) {
+    public String toString(int[] array) {
         String text = ARRAY_START;
         for (int i = 0; i < array.length-1; i++) {
             text += array[i] + ARRAY_DIVIDE;
@@ -162,7 +232,7 @@ public class Text
      * @param array the array to format
      * @return a string of formatted text
      */
-    public static String toString(double[] array) {
+    public String toString(double[] array) {
         String text = ARRAY_START;
         for (int i = 0; i < array.length-1; i++) {
             text += array[i] + ARRAY_DIVIDE;
@@ -176,21 +246,7 @@ public class Text
      * @param array the array to format
      * @return a string of formatted text
      */
-    public static String toString(char[] array) {
-        String text = ARRAY_START;
-        for (int i = 0; i < array.length-1; i++) {
-            text += array[i] + ARRAY_DIVIDE;
-        }
-        return text + array[array.length-1] + ARRAY_END;
-    }
-    
-    /**
-     * Formats the array into a string that could be outputted
-     * 
-     * @param array the array to format
-     * @return a string of formatted text
-     */
-    public static String toString(String[] array) {
+    public String toString(char[] array) {
         String text = ARRAY_START;
         for (int i = 0; i < array.length-1; i++) {
             text += array[i] + ARRAY_DIVIDE;
@@ -204,7 +260,7 @@ public class Text
      * @param matrix the matrix to format
      * @return a string of formatted text
      */
-    public static String toString(int[][] matrix) {
+    public String toString(int[][] matrix) {
         String text = "";
         for (int row = 0; row < matrix.length; row++) {
             for (int column = 0; column < matrix[row].length; column++) {
@@ -221,7 +277,7 @@ public class Text
      * @param matrix the matrix to format
      * @return a string of formatted text
      */
-    public static String toString(double[][] matrix) {
+    public String toString(double[][] matrix) {
         String text = "";
         for (int row = 0; row < matrix.length; row++) {
             for (int column = 0; column < matrix[row].length; column++) {
@@ -238,7 +294,7 @@ public class Text
      * @param matrix the matrix to format
      * @return a string of formatted text
      */
-    public static String toString(char[][] matrix) {
+    public String toString(char[][] matrix) {
         String text = "";
         for (int row = 0; row < matrix.length; row++) {
             for (int column = 0; column < matrix[row].length; column++) {
@@ -252,27 +308,11 @@ public class Text
     /**
      * Formats the matrix into a string that could be outputted
      * 
+     * @param <T> the generic type used
      * @param matrix the matrix to format
      * @return a string of formatted text
      */
-    public static String toString(String[][] matrix) {
-        String text = "";
-        for (int row = 0; row < matrix.length; row++) {
-            for (int column = 0; column < matrix[row].length; column++) {
-                text += matrix[row][column] + MATRIX_DIVIDE;
-            }
-            text += "\n";
-        }
-        return text;
-    }
-    
-    /**
-     * Formats the matrix into a string that could be outputted
-     * 
-     * @param matrix the matrix to format
-     * @return a string of formatted text
-     */
-    public static <T> String toString(T[][] matrix) {
+    public <T> String toString(T[][] matrix) {
         String text = "";
         for (int row = 0; row < matrix.length; row++) {
             for (int column = 0; column < matrix[row].length; column++) {
@@ -283,4 +323,220 @@ public class Text
         return text;
     }
         
+    /**
+     * Pad the string with trailing spaces to make sure it is the length
+     * of the parameter
+     * 
+     * @param original the string to pad
+     * @param length the length to pad it to
+     * @return the original string with padding of spaces at the end
+     */
+    public <T> String padSpaces(T original, int length) {
+        String newWord = original.toString();
+        if (newWord.length() < length) {
+            for (int i = newWord.length(); i <= length; i++) {
+                newWord = newWord + " ";
+            }
+        }
+        return newWord;
+    }
+    
+    /**
+     * Pad all the array spots with trailing spaces to make sure it is the 
+     * length of the parameter
+     * 
+     * @param array the array of values to pad
+     * @param length the length to pad it to
+     * @return the original array with padding of spaces at the ends
+     */
+    public <T> String[] padSpaces(T[] array, int length) {
+        String[] a = new String[array.length];
+        for (int i = 0; i < a.length; i++) {
+            String word = padSpaces(array[i], length);
+            a[i] = word;
+        }
+        return a;
+    }
+
+    /**
+     * Pad all the matrix spots with trailing spaces to make sure it is the 
+     * length of the parameter
+     * 
+     * @param matrix the matrix of values to pad
+     * @param length the length to pad it to
+     * @return the original matrix with padding of spaces at the ends
+     */
+    public <T> String[][] padSpaces(T[][] matrix, int length) {
+        String[][] m = new String[matrix.length][matrix[0].length];
+        for (int row = 0; row < m.length; row++) {
+            for (int column = 0; column < m[row].length; column++) {
+                String word = padSpaces(matrix[row][column], length);
+                m[row][column] = word;
+            }
+        }
+        return m;
+    }    
+    
+    /**
+     * Pad all the LinkedList spots with trailing spaces to make sure it is the 
+     * length of the parameter
+     * 
+     * @param list the LinkedList of values to pad
+     * @param length the length to pad it to
+     * @return the original LinkedList with padding of spaces at the ends
+     */
+    public <T> LinkedList padSpaces(LinkedList list, int length) {
+        LinkedList l = new LinkedList();
+        for (int i = 0; i < list.size(); i++) {
+            String word = padSpaces(list.get(i), length);
+            l.add(word);
+        }
+        return l;
+    }
+        
+    /**
+     * Pad all the array spots with trailing spaces to make sure it is the 
+     * length of the parameter
+     * 
+     * @param array the array of values to pad
+     * @return the original array with padding of spaces at the ends
+     */
+    public <T> String[] padSpaces(T[] array) {
+        int length = findLongest(array);
+        String[] a = new String[array.length];
+        for (int i = 0; i < a.length; i++) {
+            String word = padSpaces(array[i], length);
+            a[i] = word;
+        }
+        return a;
+    }
+
+    /**
+     * Pad all the matrix spots with trailing spaces to make sure it is the 
+     * length of the parameter
+     * 
+     * @param matrix the matrix of values to pad
+     * @return the original matrix with padding of spaces at the ends
+     */
+    public <T> String[][] padSpaces(T[][] matrix) {
+        int length = findLongest(matrix);
+        String[][] m = new String[matrix.length][matrix[0].length];
+        for (int row = 0; row < m.length; row++) {
+            for (int column = 0; column < m[row].length; column++) {
+                String word = padSpaces(matrix[row][column], length);
+                m[row][column] = word;
+            }
+        }
+        return m;
+    }    
+    
+    /**
+     * Pad all the LinkedList spots with trailing spaces to make sure it is the 
+     * length of the parameter
+     * 
+     * @param list the LinkedList of values to pad
+     * @return the original LinkedList with padding of spaces at the ends
+     */
+    public <T> LinkedList padSpaces(LinkedList list) {
+        int length = findLongest(list);
+        LinkedList l = new LinkedList();
+        for (int i = 0; i < list.size(); i++) {
+            String word = padSpaces(list.get(i), length);
+            l.add(word);
+        }
+        return l;
+    }
+        
+    /**
+     * Finds the longest (most characters) string value in the matrix
+     * 
+     * @param <T> the generic type used
+     * @param matrix the matrix to use
+     * @return the longest value of the longest in the matrix
+     */
+    public <T> int findLongest(T[][] matrix) {
+        int longest = 0;
+        for (int row = 0; row < matrix.length; row++) {
+            for (int column = 0; column < matrix[row].length; column++) {
+                if (matrix[row][column].toString().length() > longest) {
+                    longest = matrix[row][column].toString().length();
+                }
+            }
+        }
+        return longest;
+    }
+
+    /**
+     * Finds the longest (most characters) string value in the array
+     * 
+     * @param <T> the generic type used
+     * @param array the array to use
+     * @return the longest value of the longest in the array
+     */
+    public <T> int findLongest(T[] array) {
+        int longest = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].toString().length() > longest) {
+                longest = array[i].toString().length();
+            }
+        }
+        return longest;
+    }
+    
+    /**
+     * Finds the longest (most characters) string value in the LinkedList
+     * 
+     * @param <T> the generic type used
+     * @param list the LinkedList to use
+     * @return the longest value of the longest in the LinkedList
+     */
+    public <T> int findLongest(LinkedList list) {
+        int longest = 0;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).toString().length() > longest) {
+                longest = list.get(i).toString().length();
+            }
+        }
+        return longest;
+    }
+        
+    /**
+     * Generates a list of random characters in the range between low and high
+     * 
+     * @param low the lowest character in the range
+     * @param high the highest character in the range
+     * @param size the size to make the array
+     * @return a list of random characters
+     */
+    public LinkedList<Character> randomList(char low, char high, int size) {
+        LinkedList<Character> list = new LinkedList<Character>();
+        for (int i = 0; i < size; i++) {
+            list.add(random(low, high));
+        }
+        return list;
+    }
+
+    /**
+     * Generates a list of random strings of alphabetical characters
+     * 
+     * @param low the lowest character in the range
+     * @param high the highest character in the range
+     * @param length the length of the string to generate
+     * @param size the size to make the array
+     * @return a list of random strings
+     */
+    public LinkedList<String> randomList(char low, char high, int length, int size) {
+        return new LinkedList<String>(random(low, high, length, size));
+    }
+
+    /**
+     * Generates a list of random words from a dictionary file
+     * 
+     * @param size the size to make the array
+     * @return a list of random words
+     */
+    public LinkedList<String> randomList(int size) {
+        return new LinkedList<String>(randomWords(size));
+    }
+    
 }
