@@ -1,6 +1,9 @@
 
 /** required package class namespace */
-package cs30ssamplecode.withclasses;
+package cs42samplecode.tools;
+
+/** required imports */
+import cs42samplecode.collections.LinkedList;
 
  
 /**
@@ -14,8 +17,8 @@ public class Numbers
 
     // Encapsulated global class properties below..............................
     
-    private static final char   NEGATIVE = '-';
-    private static final char   DECIMAL  = '.';
+    private final char NEGATIVE = '-';
+    private final char DECIMAL  = '.';
     
     /**
      * Checks the value to see if it contains numerical characters or a "-" 
@@ -24,7 +27,7 @@ public class Numbers
      * @param value the string of characters to check
      * @return is a number (true) or not (false)
      */
-    public static boolean isDouble(String value) {
+    public boolean isDouble(String value) {
         char[] characters = value.toCharArray();
         for (int i = 0; i < characters.length; i++) {            
             if (Character.isDigit(characters[i]) == false) {
@@ -33,6 +36,12 @@ public class Numbers
                     return false;
                 }
             }
+        }
+        try {
+            Double.parseDouble(value);
+        } 
+        catch (NumberFormatException error) {
+            return false;
         }
         return true;
     }
@@ -43,7 +52,7 @@ public class Numbers
      * @param value the string of characters to check
      * @return is a number (true) or not (false)
      */
-    public static boolean isInteger(String value) {
+    public boolean isInteger(String value) {
         char[] characters = value.toCharArray();
         for (int i = 0; i < characters.length; i++) {            
             if (Character.isDigit(characters[i]) == false) {
@@ -51,6 +60,12 @@ public class Numbers
                     return false;
                 }
             }
+        }
+        try {
+            Integer.parseInt(value);
+        } 
+        catch (NumberFormatException error) {
+            return false;
         }
         return true;
     }
@@ -61,7 +76,7 @@ public class Numbers
      * @param number the number to check
      * @return true (if even), false (if odd)
      */
-    public static boolean isEven(int number) {
+    public boolean isEven(int number) {
         if (number % 2 == 0) return true;
         else                 return false;
     }
@@ -74,7 +89,7 @@ public class Numbers
      * @param high highest in the range
      * @return in range (true) or not (false)
      */
-    public static boolean inRange(int number, int low, int high) {
+    public boolean inRange(int number, int low, int high) {
         if (number >= low && number <= high) return true;
         return false;
     }
@@ -87,9 +102,72 @@ public class Numbers
      * @param high highest in the range
      * @return in range (true) or not (false)
      */
-    public static boolean inRange(double number, double low, double high) {
+    public boolean inRange(double number, double low, double high) {
         if (number >= low && number <= high) return true;
         return false;
+    }
+    
+    /**
+     * Rounds off a number to the passed number of decimal places
+     * 
+     * @param number the number to round off
+     * @param places the number of places to round to
+     * @return a rounded off number
+     */
+    public double round(double number, int places) {
+        String text = String.format("%." + places + "f",number);
+        double rounded = Double.parseDouble(text);
+        return rounded;
+    }
+    
+    /**
+     * Rounds off all numbers in the array to the passed number of decimal 
+     * places
+     * 
+     * @param array the array to use
+     * @param places the number of places to round to
+     * @return a rounded off array of numbers
+     */
+    public double[] round(double[] array, int places) {
+        double[] a = new double[array.length];
+        for (int i = 0; i < array.length; i++) {
+            a[i] = round(array[i], places);
+        }
+        return a;
+    }
+    
+    /**
+     * Rounds off all numbers in the matrix to the passed number of decimal 
+     * places
+     * 
+     * @param matrix the matrix to use
+     * @param places the number of places to round to
+     * @return a rounded off matrix of numbers
+     */
+    public double[][] round(double[][] matrix, int places) {
+        double[][] m = new double[matrix.length][matrix[0].length];
+        for (int row = 0; row < m.length; row++) {
+            for (int column = 0; column < m[row].length; column++) {
+                m[row][column] = round(matrix[row][column], places);
+            }
+        }
+        return m;
+    }
+    
+    /**
+     * Rounds off all numbers in the LinkedList to the passed number of decimal 
+     * places
+     * 
+     * @param list the LinkedList to use
+     * @param places the number of places to round to
+     * @return a rounded off LinkedList of numbers
+     */
+    public LinkedList<Double> round(LinkedList<Double> list, int places) {
+        LinkedList<Double> l = new LinkedList<>();
+        for (int i = 0; i < list.size(); i++) {
+            l.add(round(list.get(i), places));
+        }
+        return l;
     }
     
     /**
@@ -99,7 +177,7 @@ public class Numbers
      * @param high the highest number in the range
      * @return random number in the range
      */
-    public static int random(int low, int high) {
+    public int random(int low, int high) {
         return (int)(random((double)low, (double)high));
     }
     
@@ -110,10 +188,10 @@ public class Numbers
      * @param high the highest number in the range
      * @return random number in the range
      */
-    public static double random(double low, double high) {
+    public double random(double low, double high) {
         return ((high - low + 1d) * Math.random() + low);
     }
-
+        
     /**
      * Generates an array of random integers in the range between low and high
      * 
@@ -122,7 +200,7 @@ public class Numbers
      * @param size the size to make the array
      * @return an array of random integers
      */
-    public static int[] random(int low, int high, int size) {
+    public int[] random(int low, int high, int size) {
         int[] numbers = new int[size];      // create empty array of passed size
         for (int i = 0; i < size; i++) {    // traverse array size
             numbers[i] = random(low,high);  // assign random value to each index
@@ -138,7 +216,7 @@ public class Numbers
      * @param size the size to make the array
      * @return an array of random doubles
      */
-    public static double[] random(double low, double high, int size) {
+    public double[] random(double low, double high, int size) {
         double[] numbers = new double[size]; // create empty array 
         for (int i = 0; i < size; i++) {    // traverse array size
             numbers[i] = random(low,high);  // assign random value to each index
@@ -155,7 +233,7 @@ public class Numbers
      * @param high the highest number in the range
      * @return a matrix of random integers
      */
-    public static int[][] random(int rows, int columns, int low, int high) {
+    public int[][] random(int rows, int columns, int low, int high) {
         int[][] matrix = new int[rows][columns];    // create empty matrix
         for (int row = 0; row < rows; row++) {      // traverse rows
             matrix[row] = random(low, high, columns);   // create random row
@@ -172,13 +250,45 @@ public class Numbers
      * @param high the highest number in the range
      * @return a matrix of random doubles
      */
-    public static double[][] random(int rows, int columns, double low, 
+    public double[][] random(int rows, int columns, double low, 
             double high) {
         double[][] matrix = new double[rows][columns];    // create empty matrix
         for (int row = 0; row < rows; row++) {      // traverse rows
             matrix[row] = random(low, high, columns);   // create random row
         }
         return matrix;                              // return completed matrix
+    }
+    
+    /**
+     * Generates a list of random integers in the range between low and high
+     * 
+     * @param low the lowest number in the range
+     * @param high the highest number in the range
+     * @param size the size to make the array
+     * @return a list of random integers
+     */
+    public LinkedList<Integer> randomList(int low, int high, int size) {
+        LinkedList<Integer> list = new LinkedList<Integer>();
+        for (int i = 0; i < size; i++) {
+            list.add(random(low, high));
+        }
+        return list;
+    }
+    
+    /**
+     * Generates a list of random doubles in the range between low and high
+     * 
+     * @param low the lowest number in the range
+     * @param high the highest number in the range
+     * @param size the size to make the array
+     * @return a list of random doubles
+     */
+    public LinkedList<Double> randomList(double low, double high, int size) {
+        LinkedList<Double> list = new LinkedList<Double>();
+        for (int i = 0; i < size; i++) {
+            list.add(random(low, high));
+        }
+        return list;
     }
     
 }

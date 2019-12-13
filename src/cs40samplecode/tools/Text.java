@@ -134,6 +134,20 @@ public class Text
      * @param array the array to format
      * @return a string of formatted text
      */
+    public static <T> String toString(T[] array) {
+        String text = ARRAY_START;
+        for (int i = 0; i < array.length-1; i++) {
+            text += array[i].toString() + ARRAY_DIVIDE;
+        }
+        return text + array[array.length-1] + ARRAY_END;
+    }
+    
+    /**
+     * Formats the array into a string that could be outputted
+     * 
+     * @param array the array to format
+     * @return a string of formatted text
+     */
     public static String toString(int[] array) {
         String text = ARRAY_START;
         for (int i = 0; i < array.length-1; i++) {
@@ -246,6 +260,23 @@ public class Text
         for (int row = 0; row < matrix.length; row++) {
             for (int column = 0; column < matrix[row].length; column++) {
                 text += matrix[row][column] + MATRIX_DIVIDE;
+            }
+            text += "\n";
+        }
+        return text;
+    }
+    
+    /**
+     * Formats the matrix into a string that could be outputted
+     * 
+     * @param matrix the matrix to format
+     * @return a string of formatted text
+     */
+    public static <T> String toString(T[][] matrix) {
+        String text = "";
+        for (int row = 0; row < matrix.length; row++) {
+            for (int column = 0; column < matrix[row].length; column++) {
+                text += matrix[row][column].toString() + MATRIX_DIVIDE;
             }
             text += "\n";
         }

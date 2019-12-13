@@ -10,10 +10,8 @@ import java.awt.Font;
 
 
 /**
- * Unit1Recursion.java - A sample of some code to try from up to the end of the 
- * classes unit. This code uses the same methods as the arrays unit, but it is 
- * now divided into more usable classes that target the specifics of what the
- * methods were trying to do and has categorized it into a class. this code is
+ * CS40SampleCode.java - A sample of some code to try from the CS40S course. 
+ * This code is divided into more usable classes and packages. This code is
  * just an example of some of the code tried in class or when helping 
  * students. It is not definitive code, may have bugs and has room for 
  * improvement as well as your own personal touches. But it does give you 
@@ -22,7 +20,7 @@ import java.awt.Font;
  * @author Mr. Wachs
  * @since Nov. 21, 2019, 3:49:01 p.m.
  */
-public class Unit1Recursion 
+public class CS40SampleCode 
 {
     
     // REUSABLE VARIABLES and METHODS below.....................................
@@ -80,11 +78,6 @@ public class Unit1Recursion
             double  d1 = Numbers.random(1.0, 10.0);
             char    c1 = Text.random('a', 'z');
             String  s2 = Text.random(5);
-            
-            
-            
-            
-            
             
             // constant:
             final String[] CHOICES = { "A","B","C" };
