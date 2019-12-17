@@ -28,17 +28,52 @@ import javax.swing.JTextArea;
 public class Dialogs
 {
 
-    private final Font      DEFAULT_FONT             = new JOptionPane().getFont();
-    private final Color     DEFAULT_BACKGROUND_COLOR = new JOptionPane().getBackground();
-    private final Color     DEFAULT_FOREGROUND_COLOR = new JOptionPane().getForeground();
-    private final String    DEFAULT_TITLE            = "";
-    private final Component DEFAULT_COMPONENT        = null;
-    private final ImageIcon DEFAULT_ICON             = null;
-    private final int       DEFAULT_TYPE             = JOptionPane.PLAIN_MESSAGE;
-    private final int       DEFAULT_OPTION_TYPE      = JOptionPane.YES_NO_OPTION;
-
-    private JTextArea area;
-    private Numbers   numbers;
+    private static final Font      DEFAULT_FONT             = new 
+        javax.swing.JOptionPane().getFont();
+    private static final Color     DEFAULT_BACKGROUND_COLOR = new 
+        javax.swing.JOptionPane().getBackground();
+    private static final Color     DEFAULT_FOREGROUND_COLOR = new 
+        javax.swing.JOptionPane().getForeground();
+    private static final String    DEFAULT_TITLE            = "";
+    private static final Component DEFAULT_COMPONENT        = null;
+    private static final ImageIcon DEFAULT_ICON             = null;
+    private static final int       DEFAULT_TYPE             = 
+            javax.swing.JOptionPane.PLAIN_MESSAGE;
+    private static final int       DEFAULT_OPTION_TYPE      = 
+            javax.swing.JOptionPane.YES_NO_OPTION;
+    
+    private final static String[] FONT_NAMES = {        
+        "Consolas",
+        "Courier New",
+        "Trebuchet MS",
+        "Tahoma",
+        "Bookman Old Style",
+        DEFAULT_FONT.getName()
+    };
+    
+    private final String ERROR_1 = "Error, please enter again\n\n";
+    private final String ERROR_2 = "Error, invalid number\n\n";
+    private final String ERROR_3 = "Error, number not inside range\n\n";
+    
+    private final int DIALOG_FONT_SIZE              = 14;
+    private final int DIALOG_BACKGROUND_COLOR_RED   = 238;
+    private final int DIALOG_BACKGROUND_COLOR_GREEN = 238;
+    private final int DIALOG_BACKGROUND_COLOR_BLUE  = 238;
+    private final int DIALOG_WIDTH                  = 1000;
+    private final int DIALOG_HEIGHT                 = 800;
+        
+    private final Font      DIALOG_FONT             = new 
+        Font(FONT_NAMES[0], DEFAULT_TYPE, DIALOG_FONT_SIZE);
+    private final Color     DIALOG_BACKGROUND_COLOR = new 
+        Color(DIALOG_BACKGROUND_COLOR_RED, 
+              DIALOG_BACKGROUND_COLOR_GREEN, 
+              DIALOG_BACKGROUND_COLOR_BLUE);
+    private final Dimension DIALOG_DIMENSION        = new 
+        Dimension(DIALOG_WIDTH, DIALOG_HEIGHT);
+       
+    private JTextArea   area;
+    private JScrollPane scrollPane;
+    private Numbers     numbers;
 
     /** Font used for displaying in the dialogs */
     public Font font;
@@ -62,7 +97,6 @@ public class Dialogs
      */
     public Dialogs() {
         defaults();
-        init();
     }
     
     /**
@@ -73,7 +107,6 @@ public class Dialogs
     public Dialogs(String title) {
         defaults();
         this.title = title;
-        init();
     }
 
     /**
@@ -86,7 +119,6 @@ public class Dialogs
         defaults();
         this.title  = title;
         this.parent = parent;
-        init();
     }
 
     /**
@@ -96,9 +128,7 @@ public class Dialogs
      * @param parent the component to parent the dialogs to
      * @param font font used in dialogs
      */
-    public Dialogs(String title, 
-                   Component parent,
-                   Font font) {
+    public Dialogs(String title, Component parent, Font font) {
         defaults();
         this.font  = font;
         this.title = title;
@@ -114,10 +144,7 @@ public class Dialogs
      * @param background background color used in dialogs
      * @param foreground foreground (text) color used in dialogs
      */
-    public Dialogs(String title, 
-                   Component parent,
-                   Font font, 
-                   Color background, 
+    public Dialogs(String title, Component parent, Font font, Color background, 
                    Color foreground) {
         defaults();
         this.font       = font;
@@ -138,13 +165,8 @@ public class Dialogs
      * @param messageType type of icon used in the dialogs
      * @param icon custom icon (image) used in the dialogs
      */
-    public Dialogs(String title,
-                   Component parent,
-                   Font font,
-                   Color background,
-                   Color foreground,
-                   int messageType,
-                   Icon icon) {
+    public Dialogs(String title, Component parent, Font font, Color background,
+                   Color foreground, int messageType, Icon icon) {
         defaults();
         this.parent      = parent;
         this.messageType = messageType;
@@ -183,14 +205,9 @@ public class Dialogs
      * @param height the set height of the dialog
      */
     public void output(String text, int width, int height) {
-        JTextArea area = new JTextArea();
-        area.setFont(font);
-        area.setBackground(background);
-        area.setForeground(foreground);
         area.setText(text);        
-        JScrollPane scrollPane = new JScrollPane(area);  
+        scrollPane.setViewportView(area);
         scrollPane.setPreferredSize(new Dimension(width,height));
-        scrollPane.setBorder(null);
         JOptionPane.showMessageDialog(parent, scrollPane, title, messageType, 
                 icon);
     }
@@ -217,11 +234,10 @@ public class Dialogs
      */
     public int inputInteger(String text) {
         String value = input(text);
-        while (numbers.isInteger(value) == false) {
-            value = input("Error, please enter again\n\n" + text);
+        while (!numbers.isInteger(value)) {
+            value = input(ERROR_1 + text);
         }
-        int number = Integer.parseInt(value);
-        return number;        
+        return Integer.parseInt(value);        
     }
     
     /**
@@ -233,17 +249,15 @@ public class Dialogs
      * @return a valid integer
      */
     public int inputInteger(String text, int minimum, int maximum) {
-        final String ERROR_1 = "Error, invalid number\n\n" + text;
-        final String ERROR_2 = "Error, number not inside range\n\n" + text;
         String value = input(text);
         int number = 0;
         boolean done = false;
         while (!done) {
-            if (numbers.isInteger(value) == false) value = input(ERROR_1);
+            if (!numbers.isInteger(value)) value = input(ERROR_2 + text);
             else {
                 number = Integer.parseInt(value);
                 if (numbers.inRange(number, minimum, maximum)) done = true;
-                else value = input(ERROR_2);
+                else value = input(ERROR_3 + text);
             }            
         }
         return number;        
@@ -257,11 +271,10 @@ public class Dialogs
      */
     public double inputDouble(String text) {
         String value = input(text);
-        while (numbers.isDouble(value) == false) {
-            value = input("Error, please enter again\n\n" + text);
+        while (!numbers.isDouble(value)) {
+            value = input(ERROR_1 + text);
         }
-        double number = Double.parseDouble(value);
-        return number;        
+        return Double.parseDouble(value);        
     }
 
     /**
@@ -273,17 +286,15 @@ public class Dialogs
      * @return a valid double
      */
     public double inputDouble(String text, int minimum, int maximum) {
-        final String ERROR_1 = "Error, invalid number\n\n" + text;
-        final String ERROR_2 = "Error, number not inside range\n\n" + text;
         String value = input(text);
         double number = 0d;
         boolean done = false;
         while (!done) {
-            if (numbers.isDouble(value) == false) value = input(ERROR_1);
+            if (!numbers.isDouble(value)) value = input(ERROR_2 + text);
             else {
                 number = Double.parseDouble(value);
                 if (numbers.inRange(number, minimum, maximum)) done = true;
-                else value = input(ERROR_2);
+                else value = input(ERROR_3 + text);
             }            
         }
         return number;        
@@ -339,7 +350,8 @@ public class Dialogs
      * @return true (yes, play again), false (no)
      */
     public boolean playAgain() {
-        return yesNo("Do you want to play again?");
+        final String PLAY_AGAIN = "Do you want to play again?";
+        return yesNo(PLAY_AGAIN);
     }
     
     /**
@@ -395,25 +407,29 @@ public class Dialogs
      */
     private void defaults() {
         this.parent      = null;
-        this.font        = DEFAULT_FONT;
-        this.background  = DEFAULT_BACKGROUND_COLOR;
+        this.font        = DIALOG_FONT;
+        this.background  = DIALOG_BACKGROUND_COLOR;
         this.foreground  = DEFAULT_FOREGROUND_COLOR;
         this.title       = DEFAULT_TITLE;
         this.parent      = DEFAULT_COMPONENT;
         this.messageType = DEFAULT_TYPE;
         this.optionType  = DEFAULT_OPTION_TYPE;
         this.icon        = DEFAULT_ICON;
-        this.area        = new JTextArea();
         this.numbers     = new Numbers();
+        this.area        = new JTextArea();
+        this.scrollPane  = new JScrollPane();
     }
 
     /**
-     * Initializes the text area for the dialogs
+     * Initializes the display objects
      */
     private void init() {
         area.setFont(font);
         area.setBackground(background);
-        area.setForeground(foreground);
+        area.setForeground(foreground);  
+        scrollPane.setViewportView(area);
+        scrollPane.setPreferredSize(DIALOG_DIMENSION);
+        scrollPane.setBorder(null);
     }
-
+    
 }

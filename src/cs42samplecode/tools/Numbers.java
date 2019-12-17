@@ -250,8 +250,7 @@ public class Numbers
      * @param high the highest number in the range
      * @return a matrix of random doubles
      */
-    public double[][] random(int rows, int columns, double low, 
-            double high) {
+    public double[][] random(int rows, int columns, double low, double high) {
         double[][] matrix = new double[rows][columns];    // create empty matrix
         for (int row = 0; row < rows; row++) {      // traverse rows
             matrix[row] = random(low, high, columns);   // create random row

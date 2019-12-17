@@ -27,7 +27,8 @@ public class Text
     private final String ARRAY_START     = "[";
     private final String ARRAY_DIVIDE    = ",";
     private final String ARRAY_END       = "]";
-    private final String MATRIX_DIVIDE   = "\t";    
+    private final String MATRIX_DIVIDE   = "\t"; 
+    private final String NEW_LINE        = "\n";     
     private final String DICTIONARY_FILE = "/cs42samplecode/tools/dictionary.txt";
      
     private LinkedList<String>  words;
@@ -38,6 +39,7 @@ public class Text
      * Default class constructor sets class properties
      */
     public Text() {
+        final String ERROR = "URI Syntax Error: ";
         numbers = new Numbers();
         try {
             URL  url    = getClass().getResource(DICTIONARY_FILE);
@@ -47,7 +49,7 @@ public class Text
             words       = fileHandler.openList(file);
         }
         catch (URISyntaxException error) {
-            System.out.println("URI Syntax Error: " + error.getMessage());
+            System.out.println(ERROR + error.getMessage());
         }
     }
      
@@ -175,7 +177,7 @@ public class Text
      * @return a matrix of random characters
      */
     public String[][] random(int rows, int columns, int length, char low, 
-            char high) {
+                             char high) {
         String[][] matrix = new String[rows][columns];  // create empty matrix
         for (int row = 0; row < rows; row++) {          // traverse rows
             matrix[row] = random(low, high, length, columns);   // create row
@@ -266,7 +268,7 @@ public class Text
             for (int column = 0; column < matrix[row].length; column++) {
                 text += matrix[row][column] + MATRIX_DIVIDE;
             }
-            text += "\n";
+            text += NEW_LINE;
         }
         return text;
     }
@@ -283,7 +285,7 @@ public class Text
             for (int column = 0; column < matrix[row].length; column++) {
                 text += matrix[row][column] + MATRIX_DIVIDE;
             }
-            text += "\n";
+            text += NEW_LINE;
         }
         return text;
     }
@@ -300,7 +302,7 @@ public class Text
             for (int column = 0; column < matrix[row].length; column++) {
                 text += matrix[row][column] + MATRIX_DIVIDE;
             }
-            text += "\n";
+            text += NEW_LINE;
         }
         return text;
     }
@@ -318,7 +320,7 @@ public class Text
             for (int column = 0; column < matrix[row].length; column++) {
                 text += matrix[row][column].toString() + MATRIX_DIVIDE;
             }
-            text += "\n";
+            text += NEW_LINE;
         }
         return text;
     }
@@ -332,10 +334,11 @@ public class Text
      * @return the original string with padding of spaces at the end
      */
     public <T> String padSpaces(T original, int length) {
+        final String SPACE = " ";
         String newWord = original.toString();
         if (newWord.length() < length) {
             for (int i = newWord.length(); i <= length; i++) {
-                newWord = newWord + " ";
+                newWord = newWord + SPACE;
             }
         }
         return newWord;
@@ -538,5 +541,5 @@ public class Text
     public LinkedList<String> randomList(int size) {
         return new LinkedList<String>(randomWords(size));
     }
-    
+        
 }
