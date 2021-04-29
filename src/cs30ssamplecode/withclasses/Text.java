@@ -20,17 +20,20 @@ public class Text
     private static final String ARRAY_DIVIDE  = ",";
     private static final String ARRAY_END     = "]";
     private static final String MATRIX_DIVIDE = "\t";
+    private static final String LINE_BREAK    = "\n";
+    
      
+    // Public and static (shared, does not an object) methods below............ 
      
     /**
-     * Generates a random character
+     * Generates a random character in a range
      * 
      * @param low lowest character in the range
      * @param high highest character in the range
      * @return random character in range
      */
     public static char random(char low, char high) {
-        return (char)(Numbers.random((int)low,(int)high));     
+        return (char)(Numbers.random((int)low,(int)high));
     }
         
     /**
@@ -42,15 +45,15 @@ public class Text
      * @return a random string of characters
      */
     public static String random(int length, char low, char high) {
-        String text = "";
-        for (int i = 0; i < length; i++) {
-            text += random(low, high);
+        String text = "";                   // Variable to store string
+        for (int i = 0; i < length; i++) {  // Loop to the length wanted
+            text += random(low, high);      // Attach random character to string
         }
-        return text;
+        return text;                        // Return completed string
     }
     
     /**
-     * Generate a random string of alphabetical characters
+     * Generate a random string of alphabetical characters (between a-z)
      * 
      * @param length the length of the string to generate
      * @return a random string of characters
@@ -68,11 +71,11 @@ public class Text
      * @return an array of random characters
      */
     public static char[] random(char low, char high, int size) {
-        char[] numbers = new char[size];    // create empty array 
-        for (int i = 0; i < size; i++) {    // traverse array size
-            numbers[i] = random(low,high);  // assign random value to each index
+        char[] numbers = new char[size];    // Create empty array 
+        for (int i = 0; i < size; i++) {    // Traverse array size
+            numbers[i] = random(low,high);  // Assign random value to each index
         }
-        return numbers;                     // return completed array
+        return numbers;                     // Return completed array
     }
     
     /**
@@ -85,11 +88,11 @@ public class Text
      * @return an array of random strings
      */
     public static String[] random(char low, char high, int length, int size) {
-        String[] strings = new String[size]; // create empty array 
-        for (int i = 0; i < size; i++) {     // traverse array size
-            strings[i] = random(length);     // assign random value to index
+        String[] strings = new String[size]; // Create empty array 
+        for (int i = 0; i < size; i++) {     // Traverse array size
+            strings[i] = random(length);     // Assign random value to index
         }
-        return strings;                      // return completed array
+        return strings;                      // Return completed array
     }       
     
     /**
@@ -102,11 +105,11 @@ public class Text
      * @return a matrix of random characters
      */
     public static char[][] random(int rows, int columns, char low, char high) {
-        char[][] matrix = new char[rows][columns];      // create empty matrix
-        for (int row = 0; row < rows; row++) {          // traverse rows
-            matrix[row] = random(low, high, columns);   // create random row
+        char[][] matrix = new char[rows][columns];      // Create empty matrix
+        for (int row = 0; row < rows; row++) {          // Traverse rows
+            matrix[row] = random(low, high, columns);   // Create random row
         }
-        return matrix;                              // return completed matrix
+        return matrix;                              // Return completed matrix
     }
     
     /**
@@ -121,11 +124,11 @@ public class Text
      */
     public static String[][] random(int rows, int columns, int length, char low, 
             char high) {
-        String[][] matrix = new String[rows][columns];  // create empty matrix
-        for (int row = 0; row < rows; row++) {          // traverse rows
-            matrix[row] = random(low, high, length, columns);   // create row
+        String[][] matrix = new String[rows][columns];  // Create empty matrix
+        for (int row = 0; row < rows; row++) {          // Traverse rows
+            matrix[row] = random(low, high, length, columns);   // Create row
         }
-        return matrix;                              // return completed matrix
+        return matrix;                              // Return completed matrix
     }
     
     /**
@@ -135,11 +138,11 @@ public class Text
      * @return a string of formatted text
      */
     public static String toString(int[] array) {
-        String text = ARRAY_START;
-        for (int i = 0; i < array.length-1; i++) {
-            text += array[i] + ARRAY_DIVIDE;
+        String text = ARRAY_START;                  // Variable to store array
+        for (int i = 0; i < array.length-1; i++) {  // Traverse array 
+            text += array[i] + ARRAY_DIVIDE;        // Attach index to variable
         }
-        return text + array[array.length-1] + ARRAY_END;
+        return text + array[array.length-1] + ARRAY_END;    // Attach last index
     }
     
     /**
@@ -149,11 +152,11 @@ public class Text
      * @return a string of formatted text
      */
     public static String toString(double[] array) {
-        String text = ARRAY_START;
-        for (int i = 0; i < array.length-1; i++) {
-            text += array[i] + ARRAY_DIVIDE;
+        String text = ARRAY_START;                  // Variable to store array
+        for (int i = 0; i < array.length-1; i++) {  // Traverse array 
+            text += array[i] + ARRAY_DIVIDE;        // Attach index to variable
         }
-        return text + array[array.length-1] + ARRAY_END;
+        return text + array[array.length-1] + ARRAY_END;    // Attach last index
     }
     
     /**
@@ -163,11 +166,11 @@ public class Text
      * @return a string of formatted text
      */
     public static String toString(char[] array) {
-        String text = ARRAY_START;
-        for (int i = 0; i < array.length-1; i++) {
-            text += array[i] + ARRAY_DIVIDE;
+        String text = ARRAY_START;                  // Variable to store array
+        for (int i = 0; i < array.length-1; i++) {  // Traverse array 
+            text += array[i] + ARRAY_DIVIDE;        // Attach index to variable
         }
-        return text + array[array.length-1] + ARRAY_END;
+        return text + array[array.length-1] + ARRAY_END;    // Attach last index
     }
     
     /**
@@ -177,11 +180,11 @@ public class Text
      * @return a string of formatted text
      */
     public static String toString(String[] array) {
-        String text = ARRAY_START;
-        for (int i = 0; i < array.length-1; i++) {
-            text += array[i] + ARRAY_DIVIDE;
+        String text = ARRAY_START;                  // Variable to store array
+        for (int i = 0; i < array.length-1; i++) {  // Traverse array 
+            text += array[i] + ARRAY_DIVIDE;        // Attach index to variable
         }
-        return text + array[array.length-1] + ARRAY_END;
+        return text + array[array.length-1] + ARRAY_END;    // Attach last index
     }
     
     /**
@@ -191,12 +194,12 @@ public class Text
      * @return a string of formatted text
      */
     public static String toString(int[][] matrix) {
-        String text = "";
-        for (int row = 0; row < matrix.length; row++) {
+        String text = "";                           // Variable to store matrix
+        for (int row = 0; row < matrix.length; row++) {     // Traverse matrix
             for (int column = 0; column < matrix[row].length; column++) {
-                text += matrix[row][column] + MATRIX_DIVIDE;
+                text += matrix[row][column] + MATRIX_DIVIDE;    // Attach value
             }
-            text += "\n";
+            text += LINE_BREAK;                             // Attach line break
         }
         return text;
     }
@@ -208,12 +211,12 @@ public class Text
      * @return a string of formatted text
      */
     public static String toString(double[][] matrix) {
-        String text = "";
-        for (int row = 0; row < matrix.length; row++) {
+        String text = "";                           // Variable to store matrix
+        for (int row = 0; row < matrix.length; row++) {     // Traverse matrix
             for (int column = 0; column < matrix[row].length; column++) {
-                text += matrix[row][column] + MATRIX_DIVIDE;
+                text += matrix[row][column] + MATRIX_DIVIDE;    // Attach value
             }
-            text += "\n";
+            text += LINE_BREAK;                             // Attach line break
         }
         return text;
     }
@@ -225,12 +228,12 @@ public class Text
      * @return a string of formatted text
      */
     public static String toString(char[][] matrix) {
-        String text = "";
-        for (int row = 0; row < matrix.length; row++) {
+        String text = "";                           // Variable to store matrix
+        for (int row = 0; row < matrix.length; row++) {     // Traverse matrix
             for (int column = 0; column < matrix[row].length; column++) {
-                text += matrix[row][column] + MATRIX_DIVIDE;
+                text += matrix[row][column] + MATRIX_DIVIDE;    // Attach value
             }
-            text += "\n";
+            text += LINE_BREAK;                             // Attach line break
         }
         return text;
     }
@@ -242,12 +245,12 @@ public class Text
      * @return a string of formatted text
      */
     public static String toString(String[][] matrix) {
-        String text = "";
-        for (int row = 0; row < matrix.length; row++) {
+        String text = "";                           // Variable to store matrix
+        for (int row = 0; row < matrix.length; row++) {     // Traverse matrix
             for (int column = 0; column < matrix[row].length; column++) {
-                text += matrix[row][column] + MATRIX_DIVIDE;
+                text += matrix[row][column] + MATRIX_DIVIDE;    // Attach value
             }
-            text += "\n";
+            text += LINE_BREAK;                             // Attach line break
         }
         return text;
     }
