@@ -30,7 +30,7 @@ import javax.swing.JTextArea;
 public class Unit3Arrays 
 {
 
-    // REUSABLE VARIABLES and METHODS below.....................................
+    // REUSABLE VARIABLES and METHODS (below this line)........................
     
     static final String TITLE      = "Sample App";
     static final Font   FONT       = new Font("Consolas",Font.PLAIN,12);
@@ -49,18 +49,20 @@ public class Unit3Arrays
     }
 
     /**
-     * starts the application
+     * Starts the application and welcomes user with a dialog
      */
     private static void start() {
+        // Call output to generate a dialog and attach the title global variable
         output("Welcome to " + TITLE);
     }
-
+    
     /**
-     * ends the application
+     * Ends the application with a dialog and terminates the application
      */
     private static void end() {
+        // Call output dialog and attach global title then terminate the app
         output("Thanks for using " + TITLE);
-        System.exit(0);                                 // terminates the app
+        System.exit(0);                                 // Terminates the app
     }
 
     /**
@@ -70,7 +72,11 @@ public class Unit3Arrays
      * @return true (yes), false (no)
      */
     private static boolean yesNo(String text) {
-        JTextArea area  = formatArea(text);
+        // Create graphical display area with formatted text to put in dialog
+        JTextArea area = formatArea(text);
+        // Store the user's response in a variable from what they clicked on
+        // when the dialog appears only showing "yes" and "no" buttons for 
+        // the user to choose from  
         int response = JOptionPane.showConfirmDialog(null,area,TITLE,
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) return true;
@@ -84,15 +90,23 @@ public class Unit3Arrays
      * @return a valid string
      */
     private static String input(String text) {
-        JTextArea area  = formatArea(text);
+        // Create graphical display area with formatted text to put in dialog
+        JTextArea area = formatArea(text);
+        // Store the user's response in a variable from what they typed into
+        // a input dialog
         String    value = JOptionPane.showInputDialog(null, 
                 area,TITLE,JOptionPane.QUESTION_MESSAGE);
+        // Create an error message if they user did not enter a value correctly
+        final String ERROR = "Error, please enter again\n\n";
+        // Force a loop if the user left the dialog empty and clicked "ok" or
+        // they clicked "cancel" or the "X"
         while (value == null || value.equals("")) {
-            area  = formatArea("Error, please enter again\n\n" + text);
+            // Recreate the graphical display area
+            area  = formatArea(ERROR + text);
             value = JOptionPane.showInputDialog(null,area,TITLE,
                     JOptionPane.QUESTION_MESSAGE);
         }
-        return value;
+        return value;           // Once they have entered a value, return it
     }
     
     /**
@@ -102,12 +116,15 @@ public class Unit3Arrays
      * @return a valid integer
      */
     private static int inputInteger(String text) {
-        String value = input(text);
+        String value = input(text);     // Get user's response
+        // Create an error message if they user did not enter a value correctly
+        final String ERROR = "Error, please enter again\n\n";
+        // Force a loop if the user did not enter a valid integer
         while (isInteger(value) == false) {
-            value = input("Error, please enter again\n\n" + text);
+            value = input(ERROR + text);
         }
-        int number = Integer.parseInt(value);
-        return number;        
+        int number = Integer.parseInt(value);       // Convert to integer
+        return number;                              // Return number value
     }
     
     /**
@@ -118,12 +135,39 @@ public class Unit3Arrays
      * @return a valid integer
      */
     private static double inputDouble(String text) {
-        String value = input(text);
+        String value = input(text);     // Get user's response
+        // Create an error message if they user did not enter a value correctly
+        final String ERROR = "Error, please enter again\n\n";
+        // Force a loop if the user did not enter a valid double
         while (isDouble(value) == false) {
-            value = input("Error, please enter again\n\n" + text);
+            value = input(ERROR + text);
         }
-        double number = Double.parseDouble(value);
-        return number;        
+        double number = Double.parseDouble(value);      // Convert to double
+        return number;                                  // Return number value
+    }
+    
+    /**
+     * Checks the value to see if it contains numerical characters or a "-"
+     * 
+     * @param value the string of characters to check
+     * @return is a number (true) or not (false)
+     */
+    private static boolean isInteger(String value) {
+        // Convert string into array of char values (built-in string method)
+        char[] characters = value.toCharArray();
+        // Loop (traverse) through this array from start to end
+        for (int i = 0; i < characters.length; i++) {      
+            // Read in the character at this index
+            char character = characters[i];
+            // Use built-in method to see if this character is a digit (0-9)
+            if (Character.isDigit(character) == false) {
+                // Character was not a digit, but is it the negative sign 
+                if (characters[i] != '-') {
+                    return false;       // Not a valid character for a integer
+                }
+            }
+        }
+        return true;                    // All characters valid for a integer
     }
 
     /**
@@ -134,34 +178,36 @@ public class Unit3Arrays
      * @return is a number (true) or not (false)
      */
     private static boolean isDouble(String value) {
+        // Convert string into array of char values (built-in string method)
         char[] characters = value.toCharArray();
-        for (int i = 0; i < characters.length; i++) {            
-            if (Character.isDigit(characters[i]) == false) {
+        // Loop (traverse) through this array from start to end
+        for (int i = 0; i < characters.length; i++) {  
+            // Read in the character at this index
+            char character = characters[i];
+            // Use built-in method to see if this character is a digit (0-9)
+            if (Character.isDigit(character) == false) {
+                // Character was not a digit, but is it the negative sign or
+                // the decimal symbol
                 if (characters[i] != '.' && 
                     characters[i] != '-') {
-                    return false;
+                    return false;       // Not a valid character for a double
                 }
             }
         }
-        return true;
+        return true;                    // All characters valid for a double
     }
     
     /**
-     * Checks the value to see if it contains numerical characters or a "-"
+     * Outputs text in a more visual graphical dialog 
      * 
-     * @param value the string of characters to check
-     * @return is a number (true) or not (false)
+     * @param text the text to display
      */
-    private static boolean isInteger(String value) {
-        char[] characters = value.toCharArray();
-        for (int i = 0; i < characters.length; i++) {            
-            if (Character.isDigit(characters[i]) == false) {
-                if (characters[i] != '-') {
-                    return false;
-                }
-            }
-        }
-        return true;
+    private static void output(String text) {
+        // Create graphical display area with formatted text to put in dialog
+        JTextArea area = formatArea(text);
+        // Add the display area to the dialog to show the user
+        JOptionPane.showMessageDialog(null,area,TITLE,
+                JOptionPane.PLAIN_MESSAGE);        
     }
         
     /**
@@ -171,21 +217,13 @@ public class Unit3Arrays
      * @param imageName the name of the image to display
      */
     private static void output(String text, String imageName) {
-        JTextArea area    = formatArea(text);
-        Icon      picture = new ImageIcon(imageName);
+        // Create graphical display area with formatted text to put in dialog
+        JTextArea area = formatArea(text);
+        // Create a icon picture from the name (and path) to an image file
+        Icon picture = new ImageIcon(imageName);
+        // Add the display area and icon to the dialog to show the user
         JOptionPane.showMessageDialog(null,area,TITLE,
                 JOptionPane.PLAIN_MESSAGE,picture);        
-    }
-    
-    /**
-     * Outputs text in a more visual graphical dialog 
-     * 
-     * @param text the text to display
-     */
-    private static void output(String text) {
-        JTextArea area = formatArea(text);
-        JOptionPane.showMessageDialog(null,area,TITLE,
-                JOptionPane.PLAIN_MESSAGE);        
     }
     
     /**
@@ -195,9 +233,9 @@ public class Unit3Arrays
      * @return the formatted text area for display
      */
     private static JTextArea formatArea(String text) {
-        // create a graphics object to display the graphical things
+        // Create a graphics object to display the graphical things
         JTextArea area = new JTextArea();
-        // assign the font, colors, and text to the area
+        // Assign the global variable font, colors, and passed text to the area
         area.setFont(FONT);
         area.setBackground(BACKGROUND);
         area.setForeground(FOREGROUND);
@@ -211,6 +249,7 @@ public class Unit3Arrays
      * @return true (yes, play again), false (no)
      */
     private static boolean playAgain() {
+        // Send the yesNo method the play again message
         return yesNo("Do you want to play again?");
     }
     
@@ -221,8 +260,8 @@ public class Unit3Arrays
      * @return true (if even), false (if odd)
      */
     private static boolean isEven(int number) {
-        if (number % 2 == 0) return true;
-        else                 return false;
+        if (number % 2 == 0) return true;   // Number divides evenly by zero
+        else                 return false;  // Number does not divide by zero
     }
     
     /**
@@ -239,6 +278,39 @@ public class Unit3Arrays
     }
         
     /**
+     * Generate a random number (a double) in a range
+     * 
+     * @param low the lowest double in the range
+     * @param high the highest double in the range
+     * @return random double in the range
+     */
+    private static double random(double low, double high) {
+        return (high - low + 1d) * Math.random() + low;
+    }
+    
+    /**
+     * Generate a random number (an integer) in a range
+     * 
+     * @param low the lowest integer in the range
+     * @param high the highest integer in the range
+     * @return random integer in the range
+     */
+    private static int random(int low, int high) {
+        return (int)(random((double)low, (double)high));
+    }
+    
+    /**
+     * Generates a random character in a range
+     * 
+     * @param low lowest character in the range
+     * @param high highest character in the range
+     * @return random character in range
+     */
+    private static char random(char low, char high) {
+        return (char)random((int)low,(int)high);     // cast to int and back  
+    }
+    
+    /**
      * Presents an input dialog with a drop down selection of options
      * 
      * @param text the text to show in the dialog
@@ -246,11 +318,14 @@ public class Unit3Arrays
      * @return the option they choose
      */
     private static String choices(String text, String[] options) {
+        // Create graphical display area with formatted text to put in dialog
         JTextArea area = formatArea(text);
+        // Add display area to dialog to show user which gives a drop-down
+        // in the dialog and returns an "object"
         Object object = JOptionPane.showInputDialog(null, area, TITLE, 
                 JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-        if (object == null)  return "";
-        else                 return object.toString();
+        if (object == null)  return "";                 // User selects "X"
+        else                 return object.toString();  // Return user's choice
     }
         
     /**
@@ -262,11 +337,11 @@ public class Unit3Arrays
      * @return an array of random integers
      */
     private static int[] random(int low, int high, int size) {
-        int[] numbers = new int[size];      // create empty array of passed size
-        for (int i = 0; i < size; i++) {    // traverse array size
-            numbers[i] = random(low,high);  // assign random value to each index
+        int[] numbers = new int[size];      // Create empty array of passed size
+        for (int i = 0; i < size; i++) {    // Traverse array 
+            numbers[i] = random(low,high);  // Assign random value to each index
         }
-        return numbers;                     // return completed array
+        return numbers;                     // Return completed array
     }
     
     /**
@@ -278,11 +353,11 @@ public class Unit3Arrays
      * @return an array of random doubles
      */
     private static double[] random(double low, double high, int size) {
-        double[] numbers = new double[size]; // create empty array 
-        for (int i = 0; i < size; i++) {    // traverse array size
-            numbers[i] = random(low,high);  // assign random value to each index
+        double[] numbers = new double[size]; // Create empty array 
+        for (int i = 0; i < size; i++) {    // Traverse array 
+            numbers[i] = random(low,high);  // Assign random value to each index
         }
-        return numbers;                     // return completed array
+        return numbers;                     // Return completed array
     }
    
     /**
@@ -294,11 +369,11 @@ public class Unit3Arrays
      * @return an array of random characters
      */
     private static char[] random(char low, char high, int size) {
-        char[] numbers = new char[size];    // create empty array 
-        for (int i = 0; i < size; i++) {    // traverse array size
-            numbers[i] = random(low,high);  // assign random value to each index
+        char[] numbers = new char[size];    // Create empty array 
+        for (int i = 0; i < size; i++) {    // Traverse array 
+            numbers[i] = random(low,high);  // Assign random value to each index
         }
-        return numbers;                     // return completed array
+        return numbers;                     // Return completed array
     }
     
     /**
@@ -308,11 +383,11 @@ public class Unit3Arrays
      * @return a string of formatted text
      */
     private static String toString(int[] array) {
-        String text = "[";
-        for (int i = 0; i < array.length-1; i++) {
-            text += array[i] + ",";
+        String text = "[";                          // Variable to store array
+        for (int i = 0; i < array.length-1; i++) {  // Traverse array 
+            text += array[i] + ",";                 // Attach index to variable
         }
-        text += array[array.length-1] + "]";
+        text += array[array.length-1] + "]";        // Attach last index
         return text;
     }
     
@@ -323,11 +398,11 @@ public class Unit3Arrays
      * @return a string of formatted text
      */
     private static String toString(double[] array) {
-        String text = "[";
-        for (int i = 0; i < array.length-1; i++) {
-            text += array[i] + ",";
+        String text = "[";                          // Variable to store array
+        for (int i = 0; i < array.length-1; i++) {  // Traverse array 
+            text += array[i] + ",";                 // Attach index to variable
         }
-        text += array[array.length-1] + "]";
+        text += array[array.length-1] + "]";        // Attach last index
         return text;
     }
     
@@ -338,49 +413,16 @@ public class Unit3Arrays
      * @return a string of formatted text
      */
     private static String toString(char[] array) {
-        String text = "[";
-        for (int i = 0; i < array.length-1; i++) {
-            text += array[i] + ",";
+        String text = "[";                          // Variable to store array
+        for (int i = 0; i < array.length-1; i++) {  // Traverse array 
+            text += array[i] + ",";                 // Attach index to variable
         }
-        text += array[array.length-1] + "]";
+        text += array[array.length-1] + "]";        // Attach last index
         return text;
     }
     
-    /**
-     * Generates a random character
-     * 
-     * @param low lowest character in the range
-     * @param high highest character in the range
-     * @return random character in range
-     */
-    private static char random(char low, char high) {
-        return (char)random((int)low,(int)high);     // cast to int and back  
-    }
-    
-    /**
-     * Generate a random number in a range
-     * 
-     * @param low the lowest number in the range
-     * @param high the highest number in the range
-     * @return random number in the range
-     */
-    private static int random(int low, int high) {
-        return (int)(random((double)low, (double)high));
-    }
-    
-    /**
-     * Generate a random number in a range
-     * 
-     * @param low the lowest number in the range
-     * @param high the highest number in the range
-     * @return random number in the range
-     */
-    private static double random(double low, double high) {
-        return (high - low + 1d) * Math.random() + low;
-    }
+    // PROBLEM SPECIFIC VARIABLES and METHODS (below this line)................
 
-    // METHODS and VARIABLES FOR THIS PROBLEM below.............................
- 
     /**
      * The main logic for this program
      */
