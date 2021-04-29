@@ -117,7 +117,7 @@ public class Unit2Methods
         }
         // Now convert what the user entered into an integer
         int number = Integer.parseInt(value);
-        return number;        // Then return that nuber value      
+        return number;        // Then return that number value      
     }
     
     /**
