@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 public class Unit2Methods
 {
 
-    // REUSABLE VARIABLES and METHODS below.....................................
+    // REUSABLE VARIABLES and METHODS (below this line)........................
     
     static final String TITLE = "Sample App";
     
@@ -40,18 +40,20 @@ public class Unit2Methods
     }
 
     /**
-     * starts the application
+     * Starts the application and welcomes user with a dialog
      */
     private static void start() {
+        // Call output to generate a dialog and attach the title global variable
         output("Welcome to " + TITLE);
     }
 
     /**
-     * ends the application
+     * Ends the application with a dialog and terminates the application
      */
     private static void end() {
+        // Call output dialog and attach global title then terminate the app
         output("Thanks for using " + TITLE);
-        System.exit(0);                                 // terminates the app
+        System.exit(0);                                 // Terminates the app
     }
 
     /**
@@ -61,13 +63,16 @@ public class Unit2Methods
      * @return true (yes), false (no)
      */
     private static boolean yesNo(String text) {
+        // Store the user's response in a variable from what they clicked on
+        // when the dialog appears only showing "yes" and "no" buttons for 
+        // the user to choose from         
         int response = JOptionPane.showConfirmDialog(null,text,TITLE,
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);        
         if (response == JOptionPane.YES_OPTION) {
-            return true;
+            return true;            // The user's response picked yes
         }
         else {
-            return false;
+            return false;           // The user's response picked no
         }
     }
     
@@ -78,13 +83,20 @@ public class Unit2Methods
      * @return a valid string
      */
     private static String input(String text) {
+        // Store the user's response in a variable from what they typed into
+        // a input dialog
         String value = JOptionPane.showInputDialog(null, 
                 text,TITLE,JOptionPane.QUESTION_MESSAGE);
+        // Create an error message if they user did not enter a value correctly
+        final String ERROR = "Error, please enter again\\n\\n";
+        // Force a loop if the user left the dialog empty and clicked "ok" or
+        // they clicked "cancel" or the "X"
         while (value == null || value.equals("")) {
-            value = JOptionPane.showInputDialog(null,
-                    "Error, please enter again\n\n" + text,TITLE,
-                    JOptionPane.QUESTION_MESSAGE);
+            // Have the user enter again (with error message attached)
+            value = JOptionPane.showInputDialog(null,ERROR + text,TITLE,
+                        JOptionPane.QUESTION_MESSAGE);
         }
+        // Once they have entered a value, return it
         return value;
     }
     
@@ -95,12 +107,17 @@ public class Unit2Methods
      * @return a valid integer
      */
     private static int inputInteger(String text) {
+        // Store user's response from what they inputted in a dialog
         String value = input(text);
+        // Create an error message if they user did not enter a value correctly
+        final String ERROR = "Error, please enter again\\n\\n";
+        // Force a loop if the user left the dialog empty
         while (value.equals("")) {
-            value = input("Error, please enter again\n\n" + text);
+            value = input(ERROR + text);
         }
+        // Now convert what the user entered into an integer
         int number = Integer.parseInt(value);
-        return number;        
+        return number;        // Then return that nuber value      
     }
     
     /**
@@ -111,12 +128,16 @@ public class Unit2Methods
      * @return a valid integer
      */
     private static double inputDouble(String text) {
+        // Store user's response from what they inputted in a dialog
         String value = input(text);
+        // Create an error message if they user did not enter a value correctly
+        final String ERROR = "Error, please enter again\\n\\n";
+        // Force a loop if the user left the dialog empty
         while (value.equals("")) {
-            value = input("Error, please enter again\n\n" + text);
+            value = input(ERROR + text);
         }
-        double number = Double.parseDouble(value);
-        return number;        
+        double number = Double.parseDouble(value);      // Convert to double
+        return number;                                  // Return number value       
     }
     
     /**
@@ -135,6 +156,7 @@ public class Unit2Methods
      * @return true (yes, play again), false (no)
      */
     private static boolean playAgain() {
+        // Send the yesNo method the play again message
         return yesNo("Do you want to play again?");
     }
     
@@ -145,10 +167,10 @@ public class Unit2Methods
      * @return true (if even), false (if odd)
      */
     private static boolean isEven(int number) {
-        if (number % 2 == 0) {
+        if (number % 2 == 0) {      // Number divides evenly by zero
             return true;
         }
-        else {
+        else {                      // Number does not divide evenly by zero
             return false;
         }
     }
@@ -178,15 +200,15 @@ public class Unit2Methods
      * @return random number in the range
      */
     private static int random(int low, int high) {
-        double seed   = Math.random();
-        double L      = (double)low;
-        double H      = (double)high;
-        double value  = (H - L + 1) * seed + L;
-        int    answer = (int)value;
-        return answer;        
+        double seed   = Math.random();              // Create random seed value
+        double L      = (double)low;                // Cast low boundry
+        double H      = (double)high;               // Cast high boundry
+        double value  = (H - L + 1) * seed + L;     // Apply formula
+        int    answer = (int)value;                 // Cast back to integer
+        return answer;                              // return final value     
     }
 
-    // METHODS and VARIABLES FOR THIS PROBLEM below.............................
+    // PROBLEM SPECIFIC VARIABLES and METHODS (below this line)................
  
     /**
      * The main logic for this program
