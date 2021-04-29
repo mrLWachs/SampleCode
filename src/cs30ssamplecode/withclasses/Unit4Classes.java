@@ -1,5 +1,5 @@
 
-/** required package class namespace */
+/** Required package class namespace */
 package cs30ssamplecode.withclasses;
 
 
@@ -19,7 +19,7 @@ package cs30ssamplecode.withclasses;
 public class Unit4Classes 
 {
 
-    // REUSABLE VARIABLES and METHODS below.....................................
+    // REUSABLE VARIABLES and METHODS (below this line)........................
     
     static final String TITLE = "Sample App";
     
@@ -35,21 +35,21 @@ public class Unit4Classes
     }
     
     /**
-     * starts the application
+     * Starts the application and welcomes user with a dialog
      */
     private static void start() {
-        Dialogs.output("Welcome to " + TITLE);
+        Dialogs.output("Welcome to " + TITLE);  // Call method in other class
     }
 
     /**
-     * ends the application
+     * Ends the application with a dialog and terminates the application
      */
     private static void end() {
-        Dialogs.output("Thanks for using " + TITLE);
-        System.exit(0);                                 // terminates the app
+        Dialogs.output("Thanks for using " + TITLE);    // Method from class
+        System.exit(0);                                 // Terminates the app
     }
 
-    // METHODS and VARIABLES FOR THIS PROBLEM below.............................
+    // PROBLEM SPECIFIC VARIABLES and METHODS (below this line)................
  
     /**
      * The main logic for this program
