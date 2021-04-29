@@ -88,7 +88,7 @@ public class Unit2Methods
         String value = JOptionPane.showInputDialog(null, 
                 text,TITLE,JOptionPane.QUESTION_MESSAGE);
         // Create an error message if they user did not enter a value correctly
-        final String ERROR = "Error, please enter again\\n\\n";
+        final String ERROR = "Error, please enter again\n\n";
         // Force a loop if the user left the dialog empty and clicked "ok" or
         // they clicked "cancel" or the "X"
         while (value == null || value.equals("")) {
@@ -110,7 +110,7 @@ public class Unit2Methods
         // Store user's response from what they inputted in a dialog
         String value = input(text);
         // Create an error message if they user did not enter a value correctly
-        final String ERROR = "Error, please enter again\\n\\n";
+        final String ERROR = "Error, please enter again\n\n";
         // Force a loop if the user left the dialog empty
         while (value.equals("")) {
             value = input(ERROR + text);
@@ -131,7 +131,7 @@ public class Unit2Methods
         // Store user's response from what they inputted in a dialog
         String value = input(text);
         // Create an error message if they user did not enter a value correctly
-        final String ERROR = "Error, please enter again\\n\\n";
+        final String ERROR = "Error, please enter again\n\n";
         // Force a loop if the user left the dialog empty
         while (value.equals("")) {
             value = input(ERROR + text);
