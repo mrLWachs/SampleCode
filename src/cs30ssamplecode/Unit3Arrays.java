@@ -78,7 +78,7 @@ public class Unit3Arrays
         // when the dialog appears only showing "yes" and "no" buttons for 
         // the user to choose from  
         int response = JOptionPane.showConfirmDialog(null,area,TITLE,
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (response == JOptionPane.YES_OPTION) return true;
         else                                    return false;
     }
@@ -95,7 +95,7 @@ public class Unit3Arrays
         // Store the user's response in a variable from what they typed into
         // a input dialog
         String    value = JOptionPane.showInputDialog(null, 
-                area,TITLE,JOptionPane.QUESTION_MESSAGE);
+                area,TITLE,JOptionPane.PLAIN_MESSAGE);
         // Create an error message if they user did not enter a value correctly
         final String ERROR = "Error, please enter again\n\n";
         // Force a loop if the user left the dialog empty and clicked "ok" or
@@ -104,7 +104,7 @@ public class Unit3Arrays
             // Recreate the graphical display area
             area  = formatArea(ERROR + text);
             value = JOptionPane.showInputDialog(null,area,TITLE,
-                    JOptionPane.QUESTION_MESSAGE);
+                    JOptionPane.PLAIN_MESSAGE);
         }
         return value;           // Once they have entered a value, return it
     }
@@ -323,7 +323,7 @@ public class Unit3Arrays
         // Add display area to dialog to show user which gives a drop-down
         // in the dialog and returns an "object"
         Object object = JOptionPane.showInputDialog(null, area, TITLE, 
-                JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
         if (object == null)  return "";                 // User selects "X"
         else                 return object.toString();  // Return user's choice
     }
