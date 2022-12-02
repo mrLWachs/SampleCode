@@ -1,8 +1,8 @@
 
-/** required package class namespace */
+/** Required package class namespace */
 package cs30ssamplecode;
 
-/** required imports */
+/** Required imports */
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.Icon;
@@ -377,6 +377,64 @@ public class Unit3Arrays
     }
     
     /**
+     * Generates a matrix of random integers in the range between low and high
+     * 
+     * @param low the lowest number in the range
+     * @param high the highest number in the range
+     * @param rows the number of rows (down) to make the matrix 
+     * @param columns the number of columns (across) to make the matrix
+     * @return an array of random integers
+     */
+    private static int[][] random(int low, int high, int rows, int columns) {
+        int[][] matrix = new int[rows][columns];    // Create empty matrix
+        for (int row = 0; row < rows; row++) {                  // Travel rows
+            for (int column = 0; column < columns; column++) {  // and columns
+                matrix[row][column] = random(low, high);        // Assign value
+            }
+        }
+        return matrix;                              // Return completed matrix
+    }
+    
+    /**
+     * Generates a matrix of random doubles in the range between low and high
+     * 
+     * @param low the lowest number in the range
+     * @param high the highest number in the range
+     * @param rows the number of rows (down) to make the matrix 
+     * @param columns the number of columns (across) to make the matrix
+     * @return an array of random doubles
+     */
+    private static double[][] random(double low, double high, int rows, 
+                                     int columns) {
+        double[][] matrix = new double[rows][columns];    // Create empty matrix
+        for (int row = 0; row < rows; row++) {                  // Travel rows
+            for (int column = 0; column < columns; column++) {  // and columns
+                matrix[row][column] = random(low, high);        // Assign value
+            }
+        }
+        return matrix;                              // Return completed matrix
+    }
+    
+    /**
+     * Generates a matrix of random characters in the range between low and high
+     * 
+     * @param low the lowest number in the range
+     * @param high the highest number in the range
+     * @param rows the number of rows (down) to make the matrix 
+     * @param columns the number of columns (across) to make the matrix
+     * @return an array of random characters
+     */
+    private static char[][] random(char low, char high, int rows, int columns) {
+        char[][] matrix = new char[rows][columns];    // Create empty matrix
+        for (int row = 0; row < rows; row++) {                  // Travel rows
+            for (int column = 0; column < columns; column++) {  // and columns
+                matrix[row][column] = random(low, high);        // Assign value
+            }
+        }
+        return matrix;                              // Return completed matrix
+    }
+    
+    /**
      * Formats the array into a string that could be outputted
      * 
      * @param array the array to format
@@ -421,6 +479,57 @@ public class Unit3Arrays
         return text;
     }
     
+    /**
+     * Formats the matrix into a string that could be outputted
+     * 
+     * @param matrix the array to format
+     * @return a string of formatted text
+     */
+    private static String toString(int[][] matrix) {
+        String text = "";                          // Variable to store array
+        for (int row = 0; row < matrix.length; row++) {
+            for (int column = 0; column < matrix[row].length; column++) {
+                text += matrix[row][column] + " \t";
+            }
+            text += "\n";
+        }
+        return text;
+    }
+    
+    /**
+     * Formats the matrix into a string that could be outputted
+     * 
+     * @param matrix the array to format
+     * @return a string of formatted text
+     */
+    private static String toString(double[][] matrix) {
+        String text = "";                          // Variable to store array
+        for (int row = 0; row < matrix.length; row++) {
+            for (int column = 0; column < matrix[row].length; column++) {
+                text += matrix[row][column] + " \t";
+            }
+            text += "\n";
+        }
+        return text;
+    }
+    
+    /**
+     * Formats the matrix into a string that could be outputted
+     * 
+     * @param matrix the array to format
+     * @return a string of formatted text
+     */
+    private static String toString(char[][] matrix) {
+        String text = "";                          // Variable to store array
+        for (int row = 0; row < matrix.length; row++) {
+            for (int column = 0; column < matrix[row].length; column++) {
+                text += matrix[row][column] + " \t";
+            }
+            text += "\n";
+        }
+        return text;
+    }
+    
     // PROBLEM SPECIFIC VARIABLES and METHODS (below this line)................
 
     /**
@@ -446,14 +555,20 @@ public class Unit3Arrays
             // constant:
             final String[] CHOICES = { "A","B","C" };
             
-            String   s2 = choices("Pick one", CHOICES);
-            int[]    a1 = random(1, 100, 5);
-            double[] a2 = random(1.0, 10.0, 5);
-            char[]   a3 = random('a', 'z', 5);
-            String   s3 = toString(a1);
-            String   s4 = toString(a2);
-            String   s5 = toString(a3);
-                        
+            String     s2 = choices("Pick one", CHOICES);
+            int[]      a1 = random(1, 100, 5);
+            double[]   a2 = random(1.0, 10.0, 5);
+            char[]     a3 = random('a', 'z', 5);            
+            int[][]    m1 = random(1, 9, 4, 5);
+            double[][] m2 = random(1.0, 9.0, 4, 5);
+            char[][]   m3 = random('a', 'z', 4, 5);
+            String     s3 = toString(a1);
+            String     s4 = toString(a2);
+            String     s5 = toString(a3);
+            String     s6 = toString(m1);
+            String     s7 = toString(m2);
+            String     s8 = toString(m3);
+            
             // prepare output results:
             text += "String"                    + "\t\t\t= " + s1 + "\n";
             text += "int"                       + "\t\t\t= " + n1 + "\n";
@@ -469,7 +584,10 @@ public class Unit3Arrays
             text += "random int array"          + "\t= "     + s3 + "\n";
             text += "random double array"       + "\t= "     + s4 + "\n";
             text += "random char array"         + "\t= "     + s5 + "\n";
-                        
+            text += "random int matrix"         + "\t=\n\n"  + s6 + "\n";
+            text += "random double matrix"      + "\t=\n\n"  + s7 + "\n";
+            text += "random char matrix"        + "\t=\n\n"  + s8 + "\n";
+                                    
             output(text);
         } while (playAgain() == true);
     }
