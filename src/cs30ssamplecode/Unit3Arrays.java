@@ -36,18 +36,8 @@ public class Unit3Arrays
     static final Font   FONT       = new Font("Consolas",Font.PLAIN,12);
     static final Color  BACKGROUND = new Color(238,238,238);
     static final Color  FOREGROUND = new Color(0,0,0);
-    
-    /**
-     * Main method for the project
-     * 
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        start();
-        program();
-        end();
-    }
 
+    
     /**
      * Starts the application and welcomes user with a dialog
      */
@@ -532,6 +522,17 @@ public class Unit3Arrays
     
     // PROBLEM SPECIFIC VARIABLES and METHODS (below this line)................
 
+    /**
+     * Main method for the project
+     * 
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        start();
+        program();
+        end();
+    }
+    
     /**
      * The main logic for this program
      */
