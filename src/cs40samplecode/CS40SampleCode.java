@@ -22,24 +22,17 @@ import java.awt.Font;
  */
 public class CS40SampleCode 
 {
-    
+
+    ////////////////////////////////////////////////////////////////////////////
     // REUSABLE VARIABLES and METHODS below.....................................
+    // (Note: you may also copy the import(s) starting at line 5 above)
+    ////////////////////////////////////////////////////////////////////////////
     
     static final String TITLE = "Sample App";
     static final Font   FONT  = new Font("Consolas",Font.PLAIN,12);
     
     static Dialogs dialog = new Dialogs(TITLE,null,FONT);
     
-    /**
-     * Main method for the project
-     * 
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        start();
-        program();
-        end();
-    }
     
     /**
      * starts the application
@@ -56,7 +49,21 @@ public class CS40SampleCode
         System.exit(0);                                 // terminates the app
     }
 
+    ////////////////////////////////////////////////////////////////////////////
     // METHODS and VARIABLES FOR THIS PROBLEM below.............................
+    ////////////////////////////////////////////////////////////////////////////
+
+    
+    /**
+     * Main method for the project
+     * 
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        start();
+        program();
+        end();
+    }
  
     /**
      * The main logic for this program
