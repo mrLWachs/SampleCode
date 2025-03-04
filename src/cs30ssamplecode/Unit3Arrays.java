@@ -30,7 +30,10 @@ import javax.swing.JTextArea;
 public class Unit3Arrays 
 {
 
+    ///////////////////////////////////////////////////////////////////////////
     // REUSABLE VARIABLES and METHODS (below this line)........................
+    // (Note: you may also copy the import(s) starting at line 5 above)
+    ///////////////////////////////////////////////////////////////////////////
     
     static final String TITLE      = "Sample App";
     static final Font   FONT       = new Font("Consolas",Font.PLAIN,12);
@@ -519,8 +522,11 @@ public class Unit3Arrays
         }
         return text;
     }
-    
+
+    ///////////////////////////////////////////////////////////////////////////
     // PROBLEM SPECIFIC VARIABLES and METHODS (below this line)................
+    ///////////////////////////////////////////////////////////////////////////
+    
 
     /**
      * Main method for the project
