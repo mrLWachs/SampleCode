@@ -24,7 +24,10 @@ import javax.swing.JOptionPane;
 public class Unit2Methods
 {
 
+    ///////////////////////////////////////////////////////////////////////////
     // REUSABLE VARIABLES and METHODS (below this line)........................
+    // (Note: you may also copy the import(s) starting at line 5 above)
+    ///////////////////////////////////////////////////////////////////////////
     
     static final String TITLE = "Sample App";
 
@@ -198,8 +201,11 @@ public class Unit2Methods
         return answer;                              // return final value     
     }
 
+    ///////////////////////////////////////////////////////////////////////////
     // PROBLEM SPECIFIC VARIABLES and METHODS (below this line)................
+    ///////////////////////////////////////////////////////////////////////////
 
+    
     /**
      * Main method for the project
      * 
