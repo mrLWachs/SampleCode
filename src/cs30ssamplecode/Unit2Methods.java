@@ -27,18 +27,8 @@ public class Unit2Methods
     // REUSABLE VARIABLES and METHODS (below this line)........................
     
     static final String TITLE = "Sample App";
-    
-    /**
-     * Main method for the project
-     * 
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        start();
-        program();
-        end();
-    }
 
+    
     /**
      * Starts the application and welcomes user with a dialog
      */
@@ -209,7 +199,18 @@ public class Unit2Methods
     }
 
     // PROBLEM SPECIFIC VARIABLES and METHODS (below this line)................
- 
+
+    /**
+     * Main method for the project
+     * 
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        start();
+        program();
+        end();
+    }
+    
     /**
      * The main logic for this program
      */
