@@ -19,20 +19,12 @@ package cs30ssamplecode.withclasses;
 public class Unit4Classes 
 {
 
+    ///////////////////////////////////////////////////////////////////////////
     // REUSABLE VARIABLES and METHODS (below this line)........................
+    ///////////////////////////////////////////////////////////////////////////
     
     static final String TITLE = "Sample App";
     
-    /**
-     * Main method for the project
-     * 
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        start();
-        program();
-        end();
-    }
     
     /**
      * Starts the application and welcomes user with a dialog
@@ -49,7 +41,21 @@ public class Unit4Classes
         System.exit(0);                                 // Terminates the app
     }
 
+    ///////////////////////////////////////////////////////////////////////////
     // PROBLEM SPECIFIC VARIABLES and METHODS (below this line)................
+    ///////////////////////////////////////////////////////////////////////////
+
+    
+    /**
+     * Main method for the project
+     * 
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        start();
+        program();
+        end();
+    }
  
     /**
      * The main logic for this program
