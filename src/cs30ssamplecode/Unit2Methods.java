@@ -213,14 +213,6 @@ public class Unit2Methods
      */
     public static void main(String[] args) {
         start();
-        program();
-        end();
-    }
-    
-    /**
-     * The main logic for this program
-     */
-    private static void program() {
         do {
             // variables:
             String text = "Sample program...\n\n";
@@ -235,7 +227,7 @@ public class Unit2Methods
             boolean b2 = isEven(5);     
             boolean b3 = yesNo("Do you understand?");
             
-            // prepare output results:
+            // Prepare output results:
             text += "String = "            + s1 + "\n";
             text += "int    = "            + n1 + "\n";
             text += "double = "            + n2 + "\n";
@@ -244,7 +236,8 @@ public class Unit2Methods
             text += "Do you understand = " + b3 + "\n";  
             
             output(text);
-        } while (playAgain() == true);
+        } while (playAgain() == true);        
+        end();
     }
 
 }
