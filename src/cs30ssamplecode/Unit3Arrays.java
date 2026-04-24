@@ -35,10 +35,10 @@ public class Unit3Arrays
     // (Note: you may also copy the import(s) starting at line 5 above)
     ///////////////////////////////////////////////////////////////////////////
     
-    static final String TITLE      = "Sample App";
-    static final Font   FONT       = new Font("Consolas",Font.PLAIN,12);
-    static final Color  BACKGROUND = new Color(238,238,238);
-    static final Color  FOREGROUND = new Color(0,0,0);
+    static String title      = "Sample App";
+    static Font   font       = new Font("Consolas",Font.PLAIN,12);
+    static Color  background = new Color(238,238,238);
+    static Color  foreground = new Color(0,0,0);
     
     /** This icon image will be null unless set by one of the methods */
     static Icon picture = null;
@@ -49,7 +49,7 @@ public class Unit3Arrays
      */
     private static void start() {
         // Call output to generate a dialog and attach the title global variable
-        output("Welcome to " + TITLE);
+        output("Welcome to " + title);
     }
     
     /**
@@ -57,7 +57,7 @@ public class Unit3Arrays
      */
     private static void end() {
         // Call output dialog and attach global title then terminate the app
-        output("Thanks for using " + TITLE);
+        output("Thanks for using " + title);
         System.exit(0);                                 // Terminates the app
     }
 
@@ -73,7 +73,7 @@ public class Unit3Arrays
         // Store the user's response in a variable from what they clicked on
         // when the dialog appears only showing "yes" and "no" buttons for 
         // the user to choose from  
-        int response = JOptionPane.showConfirmDialog(null, area, TITLE,
+        int response = JOptionPane.showConfirmDialog(null, area, title,
                 JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, picture);
         if (response == JOptionPane.YES_OPTION) return true;
         else                                    return false;
@@ -90,7 +90,7 @@ public class Unit3Arrays
         JTextArea area = formatArea(text);
         // Store the user's response in a variable from what they typed into
         // a input dialog
-        String value = JOptionPane.showInputDialog(null, area, TITLE,
+        String value = JOptionPane.showInputDialog(null, area, title,
                 JOptionPane.PLAIN_MESSAGE, picture, null, null).toString();
         // Create an error message if they user did not enter a value correctly
         final String ERROR = "Error, please enter again\n\n";
@@ -99,7 +99,7 @@ public class Unit3Arrays
         while (value == null || value.equals("")) {
             // Recreate the graphical display area
             area  = formatArea(ERROR + text);
-            value = JOptionPane.showInputDialog(null, area, TITLE,
+            value = JOptionPane.showInputDialog(null, area, title,
                 JOptionPane.PLAIN_MESSAGE, picture, null, null).toString();
         }
         return value;           // Once they have entered a value, return it
@@ -215,7 +215,7 @@ public class Unit3Arrays
         // Create a icon picture from the name (and path) to an image file
         if (imageName != null) picture = new ImageIcon(imageName); 
         // Add the display area and icon to the dialog to show the user
-        JOptionPane.showMessageDialog(null, area, TITLE,
+        JOptionPane.showMessageDialog(null, area, title,
                 JOptionPane.PLAIN_MESSAGE, picture);        
     }
     
@@ -252,8 +252,8 @@ public class Unit3Arrays
         // Create a icon picture from the name (and path) to an image file
         Icon picture = new ImageIcon(imageName);
         // Add the display area and icon to the dialog to show the user
-        JOptionPane.showMessageDialog(null,area,title,
-                JOptionPane.PLAIN_MESSAGE,picture);        
+        JOptionPane.showMessageDialog(null, area, title,
+                JOptionPane.PLAIN_MESSAGE, picture);        
     }
     
     /**
@@ -264,7 +264,7 @@ public class Unit3Arrays
      */
     private static JTextArea formatArea(String text) {
         // Assign the global variable font, colors, and passed text to the area
-        return formatArea(text, BACKGROUND, FOREGROUND, FONT);
+        return formatArea(text, background, foreground, font);
     }
     
     /**
@@ -367,7 +367,7 @@ public class Unit3Arrays
         JTextArea area = formatArea(text);
         // Add display area to dialog to show user which gives a drop-down
         // in the dialog and returns an "object"
-        Object object = JOptionPane.showInputDialog(null, area, TITLE, 
+        Object object = JOptionPane.showInputDialog(null, area, title, 
                 JOptionPane.PLAIN_MESSAGE, picture, options, options[0]);
         if (object == null)  return "";                 // User selects "X"
         else                 return object.toString();  // Return user's choice
