@@ -39,6 +39,9 @@ public class Unit3Arrays
     static final Font   FONT       = new Font("Consolas",Font.PLAIN,12);
     static final Color  BACKGROUND = new Color(238,238,238);
     static final Color  FOREGROUND = new Color(0,0,0);
+    
+    /** This icon image will be null unless set by one of the methods */
+    static Icon picture = null;
 
     
     /**
@@ -70,8 +73,8 @@ public class Unit3Arrays
         // Store the user's response in a variable from what they clicked on
         // when the dialog appears only showing "yes" and "no" buttons for 
         // the user to choose from  
-        int response = JOptionPane.showConfirmDialog(null,area,TITLE,
-                JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+        int response = JOptionPane.showConfirmDialog(null, area, TITLE,
+                JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, picture);
         if (response == JOptionPane.YES_OPTION) return true;
         else                                    return false;
     }
@@ -87,8 +90,8 @@ public class Unit3Arrays
         JTextArea area = formatArea(text);
         // Store the user's response in a variable from what they typed into
         // a input dialog
-        String    value = JOptionPane.showInputDialog(null, 
-                area,TITLE,JOptionPane.PLAIN_MESSAGE);
+        String value = JOptionPane.showInputDialog(null, area, TITLE,
+                JOptionPane.PLAIN_MESSAGE, picture, null, null).toString();
         // Create an error message if they user did not enter a value correctly
         final String ERROR = "Error, please enter again\n\n";
         // Force a loop if the user left the dialog empty and clicked "ok" or
@@ -96,8 +99,8 @@ public class Unit3Arrays
         while (value == null || value.equals("")) {
             // Recreate the graphical display area
             area  = formatArea(ERROR + text);
-            value = JOptionPane.showInputDialog(null,area,TITLE,
-                    JOptionPane.PLAIN_MESSAGE);
+            value = JOptionPane.showInputDialog(null, area, TITLE,
+                JOptionPane.PLAIN_MESSAGE, picture, null, null).toString();
         }
         return value;           // Once they have entered a value, return it
     }
@@ -196,11 +199,8 @@ public class Unit3Arrays
      * @param text the text to display
      */
     private static void output(String text) {
-        // Create graphical display area with formatted text to put in dialog
-        JTextArea area = formatArea(text);
-        // Add the display area to the dialog to show the user
-        JOptionPane.showMessageDialog(null,area,TITLE,
-                JOptionPane.PLAIN_MESSAGE);        
+        // Call overloaded method with no image
+        output(text,null);
     }
         
     /**
@@ -213,25 +213,77 @@ public class Unit3Arrays
         // Create graphical display area with formatted text to put in dialog
         JTextArea area = formatArea(text);
         // Create a icon picture from the name (and path) to an image file
+        if (imageName != null) picture = new ImageIcon(imageName); 
+        // Add the display area and icon to the dialog to show the user
+        JOptionPane.showMessageDialog(null, area, TITLE,
+                JOptionPane.PLAIN_MESSAGE, picture);        
+    }
+    
+    /**
+     * Displays a 'graphical' version of the message dialog (for JOptionPane)
+     * to the user, including a custom image, colors (background / foreground),
+     * new font, along with text and title.
+     * 
+     * @param text the string of text to format in the text area
+     * @param backgroundRed the red value for the background color
+     * @param backgroundGreen the green value for the background color
+     * @param backgroundBlue the blue value for the background color
+     * @param foregroundRed the red value for the foreground color
+     * @param foregroundGreen the green value for the foreground color
+     * @param foregroundBlue the blue value for the foreground color
+     * @param fontName the font name for the font object
+     * @param fontStyle the font style for the font object
+     * @param fontSize the font size for the font object
+     * @param imageName the full (first, middle, and last) name of image to use
+     * @param title the title at the top of the dialog
+     */
+    private static void output(String text, int backgroundRed, 
+            int backgroundGreen, int backgroundBlue, int foregroundRed, 
+            int foregroundGreen, int foregroundBlue, String fontName, 
+            int fontStyle, int fontSize, String imageName, String title) {
+        // Create graphics objects to display the graphical things
+        Color background = new Color(backgroundRed, backgroundGreen, 
+                backgroundBlue);
+        Color foreground = new Color(foregroundRed, foregroundGreen, 
+                foregroundBlue);
+        Font font = new Font(fontName, fontStyle, fontSize);
+        // Create graphical display area with formatted text to put in dialog
+        JTextArea area = formatArea(text, background, foreground, font);        
+        // Create a icon picture from the name (and path) to an image file
         Icon picture = new ImageIcon(imageName);
         // Add the display area and icon to the dialog to show the user
-        JOptionPane.showMessageDialog(null,area,TITLE,
+        JOptionPane.showMessageDialog(null,area,title,
                 JOptionPane.PLAIN_MESSAGE,picture);        
     }
     
     /**
      * Sets up a fancy display area for the text to display
      * 
-     * @param text the string of text to format
+     * @param text the string of text to format in the text area
      * @return the formatted text area for display
      */
     private static JTextArea formatArea(String text) {
+        // Assign the global variable font, colors, and passed text to the area
+        return formatArea(text, BACKGROUND, FOREGROUND, FONT);
+    }
+    
+    /**
+     * Sets up a fancy display area for the text to display
+     * 
+     * @param text the string of text to format in the text area
+     * @param background the Color object for the background of the text area
+     * @param foreground the Color object for the background of the text area
+     * @param font the font for the text in the text area
+     * @return the formatted text area for display
+     */
+    private static JTextArea formatArea(String text, Color background, 
+            Color foreground, Font font) {
         // Create a graphics object to display the graphical things
         JTextArea area = new JTextArea();
-        // Assign the global variable font, colors, and passed text to the area
-        area.setFont(FONT);
-        area.setBackground(BACKGROUND);
-        area.setForeground(FOREGROUND);
+        // Pass the variable font, colors, and passed text to create the area
+        area.setFont(font);
+        area.setBackground(background);
+        area.setForeground(foreground);
         area.setText(text);
         return area;
     }
@@ -316,7 +368,7 @@ public class Unit3Arrays
         // Add display area to dialog to show user which gives a drop-down
         // in the dialog and returns an "object"
         Object object = JOptionPane.showInputDialog(null, area, TITLE, 
-                JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+                JOptionPane.PLAIN_MESSAGE, picture, options, options[0]);
         if (object == null)  return "";                 // User selects "X"
         else                 return object.toString();  // Return user's choice
     }
